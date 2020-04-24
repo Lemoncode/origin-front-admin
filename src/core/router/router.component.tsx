@@ -2,7 +2,7 @@ import React from 'react';
 import { HashRouter, Switch, Route } from 'react-router-dom';
 import { AuthRouterComponent } from 'common-app/auth';
 import { routes } from './routes';
-import { LoginScene, TimeScene } from 'scenes';
+import { LoginScene, SubmoduleListScene } from 'scenes';
 
 export const RouterComponent: React.FunctionComponent = () => {
   return (
@@ -15,8 +15,8 @@ export const RouterComponent: React.FunctionComponent = () => {
         />
         <AuthRouterComponent
           exact={true}
-          path={routes.time}
-          component={TimeScene}
+          path={routes.submoduleList}
+          component={SubmoduleListScene}
         />
       </Switch>
     </HashRouter>
