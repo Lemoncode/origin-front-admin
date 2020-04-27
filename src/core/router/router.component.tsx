@@ -7,6 +7,8 @@ import {
   SubmoduleListScene,
   ProjectListScene,
   EmployeeListScene,
+  ProjectScene,
+  EmployeeScene,
 } from 'scenes';
 
 export const RouterComponent: React.FunctionComponent = () => {
@@ -32,6 +34,16 @@ export const RouterComponent: React.FunctionComponent = () => {
           exact={true}
           path={routes.employees}
           component={EmployeeListScene}
+        />
+        <Route
+          exact={true}
+          path={routes.editProject()}
+          component={ProjectScene}
+        />
+        <Route
+          exact={true}
+          path={routes.editEmployee()}
+          component={EmployeeScene}
         />
       </Switch>
     </HashRouter>
