@@ -2,7 +2,12 @@ import React from 'react';
 import { HashRouter, Switch, Route } from 'react-router-dom';
 import { AuthRouterComponent } from 'common-app/auth';
 import { routes } from './routes';
-import { LoginScene, SubmoduleListScene } from 'scenes';
+import {
+  LoginScene,
+  SubmoduleListScene,
+  ProjectListScene,
+  EmployeeListScene,
+} from 'scenes';
 
 export const RouterComponent: React.FunctionComponent = () => {
   return (
@@ -17,6 +22,16 @@ export const RouterComponent: React.FunctionComponent = () => {
           exact={true}
           path={routes.submoduleList}
           component={SubmoduleListScene}
+        />
+        <Route
+          exact={true}
+          path={routes.projects}
+          component={ProjectListScene}
+        />
+        <Route
+          exact={true}
+          path={routes.employees}
+          component={EmployeeListScene}
         />
       </Switch>
     </HashRouter>

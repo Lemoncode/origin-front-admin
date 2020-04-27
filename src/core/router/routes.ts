@@ -1,7 +1,6 @@
 interface BaseRoutes {
   root: string;
   login: string;
-  time: string;
   submoduleList: string;
   projects: string;
   editProject: string;
@@ -12,12 +11,11 @@ interface BaseRoutes {
 const baseRoutes: BaseRoutes = {
   root: '/',
   login: '/login',
-  time: '/time',
   submoduleList: '/submodule-list',
-  projects: './projects',
-  editProject: './projects/:id',
-  employees: './employees',
-  editEmployee: './employees/:id',
+  projects: '/projects',
+  editProject: '/projects/:id',
+  employees: '/employees',
+  editEmployee: '/employees/:id',
 };
 
 type Routes = Omit<BaseRoutes, 'editProject' | 'editEmployee'>;

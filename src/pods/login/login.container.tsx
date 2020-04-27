@@ -21,7 +21,7 @@ export const LoginContainer: React.FunctionComponent = () => {
       const userSession = mapLoginResponseToUserSession();
       userSession.userName = 'Admin';
       setUserSession(userSession);
-      history.push(routes.time);
+      history.push(routes.submoduleList);
     } else {
       showMessage(literals.messages.errors.invalidLogin, 'error');
     }
