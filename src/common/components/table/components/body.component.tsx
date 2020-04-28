@@ -1,29 +1,25 @@
 import React from 'react';
+import { Row } from 'react-table';
 import TableBody from '@material-ui/core/TableBody';
-import { RowComponent } from './row.component';
-import { CellComponent } from './cell.component';
 import { RowRendererProps } from '../table.vm';
 
-interface Props<T = {}> {
-  rows: T[];
-  rowRenderer?: React.ComponentType<RowRendererProps<T>>;
+interface Props<T extends object = {}> {
+  rows: Row<T>[];
+  prepareRow: (row: Row<T>) => void;
+  rowRenderer: (props: RowRendererProps<T>) => React.ReactNode;
 }
 
 export const BodyComponent: React.FunctionComponent<Props> = props => {
-  const { rowRenderer: RowRenderer, rows } = props;
+  const { rows, prepareRow, rowRenderer } = props;
   return (
     <TableBody>
-      {rows.map((row, key) =>
-        RowRenderer ? (
-          <RowRenderer key={key} row={row} />
-        ) : (
-          <RowComponent key={key}>
-            {Object.keys(row).map(key => (
-              <CellComponent key={key}>{row[key]}</CellComponent>
-            ))}
-          </RowComponent>
-        )
-      )}
+      {rows.map(row => {
+        prepareRow(row);
+        return rowRenderer({
+          ...row.getRowProps(),
+          row: row.original,
+        });
+      })}
     </TableBody>
   );
 };

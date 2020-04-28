@@ -11,6 +11,7 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
     'react/prop-types': 'off',
+    'react/jsx-key': 'off',
   },
   settings: {
     react: {

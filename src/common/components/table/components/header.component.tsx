@@ -1,21 +1,26 @@
 import React from 'react';
+import { HeaderGroup } from 'react-table';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import { CellComponent } from './cell.component';
-import * as classes from './header.styles';
 
 interface Props {
-  columns: string[];
+  headerGroups: HeaderGroup[];
 }
 
 export const HeaderComponent: React.FunctionComponent<Props> = props => {
+  const { headerGroups } = props;
   return (
-    <TableHead className={classes.root}>
-      <TableRow>
-        {props.columns.map((columnName, index) => (
-          <CellComponent key={index}>{columnName}</CellComponent>
-        ))}
-      </TableRow>
+    <TableHead>
+      {headerGroups.map(headerGroup => (
+        <TableRow {...headerGroup.getHeaderGroupProps()}>
+          {headerGroup.headers.map(column => (
+            <CellComponent {...column.getHeaderProps()}>
+              {column.render('Header')}
+            </CellComponent>
+          ))}
+        </TableRow>
+      ))}
     </TableHead>
   );
 };
