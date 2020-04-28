@@ -21,9 +21,8 @@ export const EmployeeListComponent: React.FunctionComponent = () => {
   return (
     <>
       <h1>Hello Employee list component</h1>
-      <p onClick={goToEmployee}>Go to edit employee page</p>
       <TableContainer
-        columns={['Column 1']}
+        columns={['Activo', 'Id', 'Nombre', 'Email', 'Fecha último incurrido']}
         rows={[{ id: '1', name: 'test 1' }]}
         rowRenderer={(props: RowRendererProps<any>) => (
           <RowComponent>
