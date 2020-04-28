@@ -1,5 +1,4 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
 import { routes } from 'core/router';
 import {
   TableContainer,
@@ -7,23 +6,21 @@ import {
   RowRendererProps,
 } from 'common/components/table';
 import { Typography } from '@material-ui/core';
+import { Employee } from './employee-list.vm';
 
-export const EmployeeListComponent: React.FunctionComponent = () => {
-  const history = useHistory();
-  const goToEmployee = (
-    event: React.MouseEvent<HTMLParagraphElement, MouseEvent>
-  ) => {
-    event.preventDefault();
-    history.push({
-      pathname: routes.editEmployee('1'),
-    });
-  };
+interface Props {
+  employees: Employee[];
+}
+
+export const EmployeeListComponent: React.FunctionComponent<Props> = ({
+  employees,
+}) => {
   return (
     <>
       <h1>Hello Employee list component</h1>
       <TableContainer
         columns={['Activo', 'Id', 'Nombre', 'Email', 'Fecha último incurrido']}
-        rows={[{ id: '1', name: 'test 1' }]}
+        rows={employees}
         rowRenderer={(props: RowRendererProps<any>) => (
           <RowComponent>
             <Typography>{props.row.name}</Typography>
