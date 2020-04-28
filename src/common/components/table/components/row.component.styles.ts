@@ -2,7 +2,7 @@ import { css } from 'emotion';
 import { theme } from 'core/theme';
 
 export const root = css`
-  &:nth-child(even) {
-    background-color: ${theme.palette.table.row.main};
+  &:nth-child(odd) {
+    background-color: ${theme.palette.background.default};
   }
 `;
