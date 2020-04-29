@@ -11,9 +11,11 @@ import { Employee } from '../employee-list.vm';
 
 type Props = RowRendererProps<Employee>;
 
-export const EmployeeRowComponent: React.FunctionComponent<Props> = props => {
-  const { row, onEdit, onDelete } = props;
-
+export const EmployeeRowComponent: React.FunctionComponent<Props> = ({
+  row,
+  onEdit,
+  onDelete,
+}) => {
   return (
     <RowComponent>
       <CellComponent>{row.active}</CellComponent>

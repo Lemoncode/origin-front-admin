@@ -35,8 +35,8 @@ export const EmployeeListContainer: React.FunctionComponent = () => {
   const handleDelete = async (id: string) => {
     const errorMessage = 'Error al eliminar un empleado';
     try {
-      const isDelete = await trackPromise(deleteEmployee(id));
-      isDelete ? onLoadEmployeeList() : showMessage(errorMessage, 'error');
+      const isDeleted = await trackPromise(deleteEmployee(id));
+      isDeleted ? onLoadEmployeeList() : showMessage(errorMessage, 'error');
     } catch (error) {
       error && showMessage(errorMessage, 'error');
     }

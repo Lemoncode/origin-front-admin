@@ -14,8 +14,12 @@ interface Props {
   onDelete: (id: string) => void;
 }
 
-export const EmployeeListComponent: React.FunctionComponent<Props> = props => {
-  const { employeeList, onCreate, onEdit, onDelete } = props;
+export const EmployeeListComponent: React.FunctionComponent<Props> = ({
+  employeeList,
+  onCreate,
+  onEdit,
+  onDelete,
+}) => {
   const { filteredList, onSearch, search } = useSearchBar(employeeList, [
     'name',
   ]);
