@@ -25,5 +25,5 @@ export const EmployeeListContainer: React.FunctionComponent = () => {
     onLoadEmployeeList();
   }, []);
 
-  return <EmployeeListComponent employees={employees} />;
+  return <EmployeeListComponent employeeList={employees} />;
 };

@@ -2,30 +2,35 @@ import React from 'react';
 import { routes } from 'core/router';
 import {
   TableContainer,
-  RowComponent,
   RowRendererProps,
-} from 'common/components/table';
-import { Typography } from '@material-ui/core';
+  useSearchBar,
+} from 'common/components';
 import { Employee } from './employee-list.vm';
+import { EmployeeRowComponent } from './components';
 
 interface Props {
-  employees: Employee[];
+  employeeList: Employee[];
 }
 
 export const EmployeeListComponent: React.FunctionComponent<Props> = ({
-  employees,
+  employeeList,
 }) => {
+  const { filteredList, onSearch, search } = useSearchBar(employeeList, [
+    'name',
+  ]);
   return (
     <>
-      <h1>Hello Employee list component</h1>
       <TableContainer
         columns={['Activo', 'Id', 'Nombre', 'Email', 'Fecha último incurrido']}
-        rows={employees}
-        rowRenderer={(props: RowRendererProps<any>) => (
-          <RowComponent>
-            <Typography>{props.row.name}</Typography>
-          </RowComponent>
+        rows={filteredList}
+        rowRenderer={(rowProps: RowRendererProps<Employee>) => (
+          <EmployeeRowComponent {...rowProps} />
         )}
+        enableSearch={true}
+        search={search}
+        onSearch={onSearch}
+        enablePagination={true}
+        pageSize={5}
       />
     </>
   );
