@@ -14,48 +14,43 @@ interface Props {
   onDelete: (id: string) => void;
 }
 
-export const EmployeeListComponent: React.FunctionComponent<Props> = ({
-  employeeList,
-  onCreate,
-  onEdit,
-  onDelete,
-}) => {
+export const EmployeeListComponent: React.FunctionComponent<Props> = props => {
+  const { employeeList, onCreate, onEdit, onDelete } = props;
   const { filteredList, onSearch, search } = useSearchBar(employeeList, [
     'name',
   ]);
 
   const renderContent = ({ itemName }) => {
     return (
-      <div>
+      <>
         ¿Seguro que quiere borrar a <strong>{itemName}</strong>?
-      </div>
+      </>
     );
   };
+
   return (
-    <>
-      <TableContainer
-        columns={['Activo', 'Id', 'Nombre', 'Email', 'Fecha último incurrido']}
-        rows={filteredList}
-        rowRenderer={(rowProps: RowRendererProps<Employee>) => (
-          <EmployeeRowComponent {...rowProps} />
-        )}
-        onCreate={onCreate}
-        onEdit={onEdit}
-        onDelete={onDelete}
-        labels={{
-          searchPlaceholder: 'Buscar empleado',
-          createButton: 'Nuevo empleado',
-          deleteTitle: 'Eliminar Empleado',
-          deleteContent: props => renderContent(props),
-          closeButton: 'Cancelar',
-          acceptButton: 'Aceptar',
-        }}
-        enableSearch={true}
-        search={search}
-        onSearch={onSearch}
-        enablePagination={true}
-        pageSize={5}
-      />
-    </>
+    <TableContainer
+      columns={['Activo', 'Id', 'Nombre', 'Email', 'Fecha último incurrido']}
+      rows={filteredList}
+      rowRenderer={(rowProps: RowRendererProps<Employee>) => (
+        <EmployeeRowComponent {...rowProps} />
+      )}
+      onCreate={onCreate}
+      onEdit={onEdit}
+      onDelete={onDelete}
+      labels={{
+        searchPlaceholder: 'Buscar empleado',
+        createButton: 'Nuevo empleado',
+        deleteTitle: 'Eliminar Empleado',
+        deleteContent: props => renderContent(props),
+        closeButton: 'Cancelar',
+        acceptButton: 'Aceptar',
+      }}
+      enableSearch={true}
+      search={search}
+      onSearch={onSearch}
+      enablePagination={true}
+      pageSize={5}
+    />
   );
 };
