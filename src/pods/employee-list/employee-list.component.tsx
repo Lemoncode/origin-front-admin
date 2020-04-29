@@ -26,6 +26,11 @@ export const EmployeeListComponent: React.FunctionComponent<Props> = ({
         rowRenderer={(rowProps: RowRendererProps<Employee>) => (
           <EmployeeRowComponent {...rowProps} />
         )}
+        onCreate={() => console.log}
+        labels={{
+          searchPlaceholder: 'Buscar empleados',
+          createButton: 'Nuevo empleado',
+        }}
         enableSearch={true}
         search={search}
         onSearch={onSearch}

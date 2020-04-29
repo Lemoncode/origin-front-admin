@@ -19,7 +19,7 @@ export const mockEmployeeList: Employee[] = [
     id: '3',
     active: false,
     name: 'Manuel Ruiz',
-    email: 'jose.gomez@empresa.com',
+    email: 'manuel.ruiz@empresa.com',
     lastDateIncurred: '2020-02-06T00:00:00',
   },
   {
