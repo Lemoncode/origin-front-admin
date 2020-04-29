@@ -1,36 +1,60 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
-import { routes } from 'core/router';
 import {
   TableContainer,
-  RowComponent,
   RowRendererProps,
-} from 'common/components/table';
-import { Typography } from '@material-ui/core';
+  useSearchBar,
+} from 'common/components';
+import { Employee } from './employee-list.vm';
+import { EmployeeRowComponent } from './components';
 
-export const EmployeeListComponent: React.FunctionComponent = () => {
-  const history = useHistory();
-  const goToEmployee = (
-    event: React.MouseEvent<HTMLParagraphElement, MouseEvent>
-  ) => {
-    event.preventDefault();
-    history.push({
-      pathname: routes.editEmployee('1'),
-    });
+interface Props {
+  employeeList: Employee[];
+  onCreate: () => void;
+  onEdit: (id: string) => void;
+  onDelete: (id: string) => void;
+}
+
+export const EmployeeListComponent: React.FunctionComponent<Props> = ({
+  employeeList,
+  onCreate,
+  onEdit,
+  onDelete,
+}) => {
+  const { filteredList, onSearch, search } = useSearchBar(employeeList, [
+    'name',
+  ]);
+
+  const renderContent = ({ itemName }) => {
+    return (
+      <>
+        ¿Seguro que quiere borrar a <strong>{itemName}</strong>?
+      </>
+    );
   };
+
   return (
-    <>
-      <h1>Hello Employee list component</h1>
-      <p onClick={goToEmployee}>Go to edit employee page</p>
-      <TableContainer
-        columns={['Column 1']}
-        rows={[{ id: '1', name: 'test 1' }]}
-        rowRenderer={(props: RowRendererProps<any>) => (
-          <RowComponent>
-            <Typography>{props.row.name}</Typography>
-          </RowComponent>
-        )}
-      />
-    </>
+    <TableContainer
+      columns={['Activo', 'Id', 'Nombre', 'Email', 'Fecha último incurrido']}
+      rows={filteredList}
+      rowRenderer={(rowProps: RowRendererProps<Employee>) => (
+        <EmployeeRowComponent {...rowProps} />
+      )}
+      onCreate={onCreate}
+      onEdit={onEdit}
+      onDelete={onDelete}
+      labels={{
+        searchPlaceholder: 'Buscar empleado',
+        createButton: 'Nuevo empleado',
+        deleteTitle: 'Eliminar Empleado',
+        deleteContent: props => renderContent(props),
+        closeButton: 'Cancelar',
+        acceptButton: 'Aceptar',
+      }}
+      enableSearch={true}
+      search={search}
+      onSearch={onSearch}
+      enablePagination={true}
+      pageSize={5}
+    />
   );
 };
