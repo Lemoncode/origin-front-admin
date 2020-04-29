@@ -7,6 +7,7 @@ import { trackPromise } from 'react-promise-tracker';
 import { mapEmployeeListFromApiToVm } from './employee-list.mappers';
 import { useHistory } from 'react-router-dom';
 import { routes } from 'core/router';
+const editEmployeeId = '0';
 
 export const EmployeeListContainer: React.FunctionComponent = () => {
   const [employees, setEmployees] = React.useState<Employee[]>([]);
@@ -25,7 +26,7 @@ export const EmployeeListContainer: React.FunctionComponent = () => {
   };
 
   const handleCreate = () => {
-    history.push(routes.editEmployee('0'));
+    history.push(routes.editEmployee(editEmployeeId));
   };
 
   const handleEdit = (id: string) => {
