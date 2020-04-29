@@ -1,5 +1,4 @@
 import React from 'react';
-import { routes } from 'core/router';
 import {
   TableContainer,
   RowRendererProps,
@@ -12,16 +11,26 @@ interface Props {
   employeeList: Employee[];
   onCreate: () => void;
   onEdit: (id: string) => void;
+  onDelete: (id: string) => void;
 }
 
 export const EmployeeListComponent: React.FunctionComponent<Props> = ({
   employeeList,
   onCreate,
   onEdit,
+  onDelete,
 }) => {
   const { filteredList, onSearch, search } = useSearchBar(employeeList, [
     'name',
   ]);
+
+  const renderContent = ({ itemName }) => {
+    return (
+      <div>
+        ¿Seguro que quiere borrar a <strong>{itemName}</strong>?
+      </div>
+    );
+  };
   return (
     <>
       <TableContainer
@@ -32,9 +41,14 @@ export const EmployeeListComponent: React.FunctionComponent<Props> = ({
         )}
         onCreate={onCreate}
         onEdit={onEdit}
+        onDelete={onDelete}
         labels={{
-          searchPlaceholder: 'Buscar empleados',
+          searchPlaceholder: 'Buscar empleado',
           createButton: 'Nuevo empleado',
+          deleteTitle: 'Eliminar Empleado',
+          deleteContent: props => renderContent(props),
+          closeButton: 'Cancelar',
+          acceptButton: 'Aceptar',
         }}
         enableSearch={true}
         search={search}

@@ -1,6 +1,6 @@
 import React from 'react';
 import { EmployeeListComponent } from './employee-list.component';
-import { getEmployeeList } from './api';
+import { getEmployeeList, deleteEmployee } from './api';
 import { Employee } from './employee-list.vm';
 import { useSnackbarContext } from 'common/components';
 import { trackPromise } from 'react-promise-tracker';
@@ -32,6 +32,16 @@ export const EmployeeListContainer: React.FunctionComponent = () => {
     history.push(routes.editEmployee(id));
   };
 
+  const handleDelete = async (id: string) => {
+    const errorMessage = 'Error al eliminar un empleado';
+    try {
+      const isDelete = await trackPromise(deleteEmployee(id));
+      isDelete ? onLoadEmployeeList() : showMessage(errorMessage, 'error');
+    } catch (error) {
+      error && showMessage(errorMessage, 'error');
+    }
+  };
+
   React.useEffect(() => {
     onLoadEmployeeList();
   }, []);
@@ -41,6 +51,7 @@ export const EmployeeListContainer: React.FunctionComponent = () => {
       employeeList={employees}
       onCreate={handleCreate}
       onEdit={handleEdit}
+      onDelete={handleDelete}
     />
   );
 };
