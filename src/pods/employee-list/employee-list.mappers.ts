@@ -9,6 +9,6 @@ const mapEmployeeFromApiToVm = (
 });
 
 export const mapEmployeeListFromApiToVm = (
-  employees: apiModel.Employee[]
+  employeeList: apiModel.Employee[]
 ): viewModel.Employee[] =>
-  mapToCollection(employees, e => mapEmployeeFromApiToVm(e));
+  mapToCollection(employeeList, e => mapEmployeeFromApiToVm(e));

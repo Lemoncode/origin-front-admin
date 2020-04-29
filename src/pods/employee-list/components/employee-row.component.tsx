@@ -3,8 +3,8 @@ import {
   RowRendererProps,
   RowComponent,
   CellComponent,
-  CheckboxComponent,
 } from 'common/components';
+import Checkbox from '@material-ui/core/Checkbox';
 import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -20,7 +20,7 @@ export const EmployeeRowComponent: React.FunctionComponent<Props> = ({
   return (
     <RowComponent>
       <CellComponent>
-        <CheckboxComponent checked={row.active} disabled />
+        <Checkbox checked={row.active} disabled />
       </CellComponent>
       <CellComponent>{row.id}</CellComponent>
       <CellComponent>{row.name}</CellComponent>
