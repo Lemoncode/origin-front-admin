@@ -18,24 +18,20 @@ export const ProjectRowComponent: React.FunctionComponent<Props> = ({
   onEdit,
   onDelete,
 }) => {
-  const projectToDeleted: Lookup = {
-    id: row.id,
-    name: row.projectName,
-  };
   return (
     <RowComponent>
       <CellComponent>
         <Checkbox checked={row.active} disabled />
       </CellComponent>
       <CellComponent>{row.code}</CellComponent>
-      <CellComponent>{row.projectName}</CellComponent>
+      <CellComponent>{row.name}</CellComponent>
       <CellComponent>{row.lastDateIncurred}</CellComponent>
       <CellComponent>
         {row.creationDate}
         <IconButton onClick={() => onEdit(row.id)}>
           <EditIcon />
         </IconButton>
-        <IconButton onClick={() => onDelete(projectToDeleted)}>
+        <IconButton onClick={() => onDelete(row)}>
           <DeleteIcon />
         </IconButton>
       </CellComponent>

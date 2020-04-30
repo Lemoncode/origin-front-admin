@@ -10,7 +10,7 @@ import { useHistory } from 'react-router-dom';
 const editProjectId = '0';
 
 export const ProjectListContainer: React.FunctionComponent = () => {
-  const [projectes, setProjects] = React.useState<Project[]>([]);
+  const [projects, setProjects] = React.useState<Project[]>([]);
   const { showMessage } = useSnackbarContext();
   const history = useHistory();
 
@@ -49,7 +49,7 @@ export const ProjectListContainer: React.FunctionComponent = () => {
 
   return (
     <ProjectListComponent
-      projectList={projectes}
+      projectList={projects}
       onCreate={handleCreate}
       onEdit={handleEdit}
       onDelete={handleDelete}
