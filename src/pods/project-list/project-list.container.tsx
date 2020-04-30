@@ -4,7 +4,7 @@ import { getProjectList, deleteProject } from './api';
 import { Project } from './project-list.vm';
 import { useSnackbarContext } from 'common/components';
 import { trackPromise } from 'react-promise-tracker';
-import { mapProjectLIstFromApiToVm } from './project-list.mappers';
+import { mapProjectListFromApiToVm } from './project-list.mappers';
 import { routes } from 'core/router';
 import { useHistory } from 'react-router-dom';
 const editProjectId = '0';
@@ -17,7 +17,7 @@ export const ProjectListContainer: React.FunctionComponent = () => {
   const onLoadProjectList = async () => {
     try {
       const apiProjectList = await trackPromise(getProjectList());
-      const viewModelProjectList = mapProjectLIstFromApiToVm(apiProjectList);
+      const viewModelProjectList = mapProjectListFromApiToVm(apiProjectList);
       setProjects(viewModelProjectList);
     } catch (error) {
       error &&

@@ -8,7 +8,7 @@ const mapProjectFromApiToVm = (
   ...project,
 });
 
-export const mapProjectLIstFromApiToVm = (
+export const mapProjectListFromApiToVm = (
   projectList: apiModel.Project[]
 ): viewModel.Project[] =>
   mapToCollection(projectList, p => mapProjectFromApiToVm(p));
