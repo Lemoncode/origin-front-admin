@@ -9,6 +9,7 @@ import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { Project } from '../project-list.vm';
+import { Lookup } from 'common/models';
 
 type Props = RowRendererProps<Project>;
 
@@ -17,6 +18,10 @@ export const ProjectRowComponent: React.FunctionComponent<Props> = ({
   onEdit,
   onDelete,
 }) => {
+  const projectToDeleted: Lookup = {
+    id: row.id,
+    name: row.projectName,
+  };
   return (
     <RowComponent>
       <CellComponent>
@@ -30,7 +35,7 @@ export const ProjectRowComponent: React.FunctionComponent<Props> = ({
         <IconButton onClick={() => onEdit(row.id)}>
           <EditIcon />
         </IconButton>
-        <IconButton onClick={() => onDelete(row)}>
+        <IconButton onClick={() => onDelete(projectToDeleted)}>
           <DeleteIcon />
         </IconButton>
       </CellComponent>

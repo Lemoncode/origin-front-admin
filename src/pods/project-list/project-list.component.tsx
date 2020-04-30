@@ -11,16 +11,27 @@ interface Props {
   projectList: Project[];
   onCreate: () => void;
   onEdit: (id: string) => void;
+  onDelete: (id: string) => void;
 }
 
 export const ProjectListComponent: React.FunctionComponent<Props> = ({
   projectList,
   onCreate,
   onEdit,
+  onDelete,
 }) => {
   const { filteredList, onSearch, search } = useSearchBar(projectList, [
     'projectName',
   ]);
+
+  const contentRender = ({ itemName }) => {
+    return (
+      <>
+        ¿Seguro que quiere borrar a <strong>{itemName}</strong>?
+      </>
+    );
+  };
+
   return (
     <TableContainer
       columns={[
@@ -36,9 +47,14 @@ export const ProjectListComponent: React.FunctionComponent<Props> = ({
       )}
       onCreate={onCreate}
       onEdit={onEdit}
+      onDelete={onDelete}
       labels={{
         searchPlaceholder: 'Buscar proyecto',
         createButton: 'Nuevo proyecto',
+        deleteTitle: 'Eliminar Proyecto',
+        deleteContent: props => contentRender(props),
+        closeButton: 'Cancelar',
+        acceptButton: 'Aceptar',
       }}
       enableSearch={true}
       search={search}

@@ -33,6 +33,16 @@ export const ProjectListContainer: React.FunctionComponent = () => {
     history.push(routes.editProject(id));
   };
 
+  const handleDelete = async (id: string) => {
+    const errorMessage = 'Error al eliminar un proyecto';
+    try {
+      const isDeleted = await trackPromise(deleteProject(id));
+      isDeleted ? onLoadProjectList() : showMessage(errorMessage, 'error');
+    } catch (error) {
+      error && showMessage(errorMessage, 'error');
+    }
+  };
+
   React.useEffect(() => {
     onLoadProjectList();
   }, []);
@@ -42,6 +52,7 @@ export const ProjectListContainer: React.FunctionComponent = () => {
       projectList={projectes}
       onCreate={handleCreate}
       onEdit={handleEdit}
+      onDelete={handleDelete}
     />
   );
 };
