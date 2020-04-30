@@ -1,21 +1,66 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
-import { routes } from 'core/router';
+import {
+  TableContainer,
+  RowRendererProps,
+  useSearchBar,
+} from 'common/components';
+import { Project } from './project-list.vm';
+import { ProjectRowComponent } from './components';
 
-export const ProjectListComponent: React.FunctionComponent = () => {
-  const history = useHistory();
-  const goToProject = (
-    event: React.MouseEvent<HTMLParagraphElement, MouseEvent>
-  ) => {
-    event.preventDefault();
-    history.push({
-      pathname: routes.editProject('1'),
-    });
+interface Props {
+  projectList: Project[];
+  onCreate: () => void;
+  onEdit: (id: string) => void;
+  onDelete: (id: string) => void;
+}
+
+export const ProjectListComponent: React.FunctionComponent<Props> = ({
+  projectList,
+  onCreate,
+  onEdit,
+  onDelete,
+}) => {
+  const { filteredList, onSearch, search } = useSearchBar(projectList, [
+    'projectName',
+  ]);
+
+  const contentRender = ({ itemName }) => {
+    return (
+      <>
+        ¿Seguro que quiere borrar a <strong>{itemName}</strong>?
+      </>
+    );
   };
+
   return (
-    <>
-      <h1>Hello Project list component</h1>
-      <p onClick={goToProject}>Go to edit project component</p>
-    </>
+    <TableContainer
+      columns={[
+        'Activo',
+        'Código',
+        'Proyecto',
+        'Fecha Ultimo incurrido',
+        'Fecha creación',
+      ]}
+      rows={filteredList}
+      rowRenderer={(rowProps: RowRendererProps<Project>) => (
+        <ProjectRowComponent {...rowProps} />
+      )}
+      onCreate={onCreate}
+      onEdit={onEdit}
+      onDelete={onDelete}
+      labels={{
+        searchPlaceholder: 'Buscar proyecto',
+        createButton: 'Nuevo proyecto',
+        deleteTitle: 'Eliminar Proyecto',
+        deleteContent: props => contentRender(props),
+        closeButton: 'Cancelar',
+        acceptButton: 'Aceptar',
+      }}
+      enableSearch={true}
+      search={search}
+      onSearch={onSearch}
+      enablePagination={true}
+      pageSize={5}
+    />
   );
 };
