@@ -7,6 +7,7 @@ import { trackPromise } from 'react-promise-tracker';
 import { mapProjectLIstFromApiToVm } from './project-list.mappers';
 import { routes } from 'core/router';
 import { useHistory } from 'react-router-dom';
+const editProjectId = '0';
 
 export const ProjectListContainer: React.FunctionComponent = () => {
   const [projectes, setProjects] = React.useState<Project[]>([]);
@@ -24,9 +25,23 @@ export const ProjectListContainer: React.FunctionComponent = () => {
     }
   };
 
+  const handleCreate = () => {
+    history.push(routes.editProject(editProjectId));
+  };
+
+  const handleEdit = (id: string) => {
+    history.push(routes.editProject(id));
+  };
+
   React.useEffect(() => {
     onLoadProjectList();
   }, []);
 
-  return <ProjectListComponent projectList={projectes} />;
+  return (
+    <ProjectListComponent
+      projectList={projectes}
+      onCreate={handleCreate}
+      onEdit={handleEdit}
+    />
+  );
 };

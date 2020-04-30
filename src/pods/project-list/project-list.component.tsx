@@ -9,10 +9,14 @@ import { ProjectRowComponent } from './components';
 
 interface Props {
   projectList: Project[];
+  onCreate: () => void;
+  onEdit: (id: string) => void;
 }
 
 export const ProjectListComponent: React.FunctionComponent<Props> = ({
   projectList,
+  onCreate,
+  onEdit,
 }) => {
   const { filteredList, onSearch, search } = useSearchBar(projectList, [
     'projectName',
@@ -30,6 +34,8 @@ export const ProjectListComponent: React.FunctionComponent<Props> = ({
       rowRenderer={(rowProps: RowRendererProps<Project>) => (
         <ProjectRowComponent {...rowProps} />
       )}
+      onCreate={onCreate}
+      onEdit={onEdit}
       labels={{
         searchPlaceholder: 'Buscar proyecto',
         createButton: 'Nuevo proyecto',
