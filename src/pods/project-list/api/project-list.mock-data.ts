@@ -1,0 +1,68 @@
+import { Project } from './project-list.api-model';
+
+export const mockProjectList: Project[] = [
+  {
+    id: '1',
+    active: true,
+    code: '23212',
+    projectName: 'Bankia',
+    lastDateIncurred: '02/02/2020',
+    creationDate: '01/08/2018',
+  },
+  {
+    id: '2',
+    active: true,
+    code: '4323',
+    projectName: 'Mapfre',
+    lastDateIncurred: '05/02/2020',
+    creationDate: '01/04/2018',
+  },
+  {
+    id: '3',
+    active: true,
+    code: '002',
+    projectName: 'Vacaciones',
+    lastDateIncurred: '05/02/2020',
+    creationDate: '01/04/2018',
+  },
+  {
+    id: '4',
+    active: true,
+    code: '003',
+    projectName: 'Baja Médica',
+    lastDateIncurred: '05/03/2018',
+    creationDate: '01/05/2019',
+  },
+  {
+    id: '5',
+    active: false,
+    code: '2586',
+    projectName: 'Proyecto interno',
+    lastDateIncurred: '05/08/2020',
+    creationDate: '01/10/2018',
+  },
+  {
+    id: '6',
+    active: false,
+    code: '3025',
+    projectName: 'BBVA',
+    lastDateIncurred: '06/05/2020',
+    creationDate: '01/03/2019',
+  },
+  {
+    id: '7',
+    active: false,
+    code: '8563',
+    projectName: 'Baja Médica',
+    lastDateIncurred: '02/08/2018',
+    creationDate: '01/11/2020',
+  },
+  {
+    id: '8',
+    active: true,
+    code: '4125',
+    projectName: 'Microsoft España',
+    lastDateIncurred: '11/10/2018',
+    creationDate: '01/07/2020',
+  },
+];
