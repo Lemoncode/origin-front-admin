@@ -9,7 +9,6 @@ import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { Project } from '../project-list.vm';
-import { Lookup } from 'common/models';
 
 type Props = RowRendererProps<Project>;
 
