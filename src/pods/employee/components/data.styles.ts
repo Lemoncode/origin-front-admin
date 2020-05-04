@@ -6,10 +6,3 @@ export const form = css`
   grid-column-gap: 1rem;
   grid-row-gap: 1rem;
 `;
-
-export const buttonContainer = css`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin-top: 1rem;
-`;

@@ -1,8 +1,7 @@
 import React from 'react';
 import { Formik, Form } from 'formik';
-import { cx } from 'emotion';
-import Button from '@material-ui/core/Button';
 import { TextFieldComponent, CheckboxComponent } from 'common/components';
+import { CommandFooterComponent } from '../../../common-app/command-footer';
 import * as classes from './data.styles';
 
 export const DataComponent: React.FunctionComponent = () => {
@@ -20,14 +19,7 @@ export const DataComponent: React.FunctionComponent = () => {
           <TextFieldComponent label="Nombre" name="name" />
           <TextFieldComponent label="Email" name="email" />
           <CheckboxComponent name="active" label="Activo" color="primary" />
-          <div className={classes.buttonContainer}>
-            <Button variant="contained" color="primary">
-              Cancelar
-            </Button>
-            <Button variant="contained" color="primary" onClick={console.log}>
-              Grabar
-            </Button>
-          </div>
+          <CommandFooterComponent onCancel={console.log} />
         </Form>
       )}
     </Formik>
