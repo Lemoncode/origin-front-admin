@@ -5,3 +5,4 @@ export * from './snackbar';
 export * from './spinner';
 export * from './table';
 export * from './search-bar';
+export * from './tabs';
