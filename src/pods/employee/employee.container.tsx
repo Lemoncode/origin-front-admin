@@ -28,6 +28,10 @@ export const EmployeeContainer: React.FunctionComponent = () => {
     }
   };
 
+  const handleCancel = () => {
+    history.back();
+  };
+
   React.useEffect(() => {
     onLoadProjectSummary();
   }, []);
@@ -36,6 +40,7 @@ export const EmployeeContainer: React.FunctionComponent = () => {
     <EmployeeComponent
       projectSummaryList={projectSummaryList}
       isEditMode={isEditModeHelper(id)}
+      onCancel={handleCancel}
     />
   );
 };

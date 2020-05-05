@@ -8,11 +8,13 @@ import { cx } from 'emotion';
 interface Props {
   className?: string;
   isEditMode: boolean;
+  onCancel: () => void;
 }
 
 export const DataComponent: React.FunctionComponent<Props> = ({
   className,
   isEditMode,
+  onCancel,
 }) => {
   console.log(isEditMode);
   return (
@@ -58,7 +60,7 @@ export const DataComponent: React.FunctionComponent<Props> = ({
             disabled
           />
           <CommandFooterComponent
-            onCancel={console.log}
+            onCancel={onCancel}
             className={classes.commands}
           />
         </Form>

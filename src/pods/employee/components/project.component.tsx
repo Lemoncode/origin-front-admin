@@ -7,11 +7,13 @@ import { CommandFooterComponent } from 'common-app/command-footer';
 interface Props {
   projectSummaryList: ProjectSummary[];
   className?: string;
+  onCancel: () => void;
 }
 
 export const ProjectComponent: React.FunctionComponent<Props> = ({
   projectSummaryList,
   className,
+  onCancel,
 }) => {
   return (
     <>
@@ -23,7 +25,7 @@ export const ProjectComponent: React.FunctionComponent<Props> = ({
           <EmployeeRowComponent {...rowProps} />
         )}
       />
-      <CommandFooterComponent onCancel={console.log} />
+      <CommandFooterComponent onCancel={onCancel} />
     </>
   );
 };

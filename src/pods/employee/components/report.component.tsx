@@ -8,10 +8,12 @@ import { cx } from 'emotion';
 
 interface Props {
   className?: string;
+  onCancel: () => void;
 }
 
 export const ReportComponent: React.FunctionComponent<Props> = ({
   className,
+  onCancel,
 }) => {
   return (
     <Formik
@@ -37,7 +39,7 @@ export const ReportComponent: React.FunctionComponent<Props> = ({
             className={classes.year}
           />
           <CommandFooterComponent
-            onCancel={console.log}
+            onCancel={onCancel}
             className={classes.commands}
             labels={{ saveButton: 'Generar', cancelButton: 'Cancelar' }}
           />

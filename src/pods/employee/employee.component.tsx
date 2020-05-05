@@ -11,11 +11,13 @@ import * as classes from './employee.styles';
 interface Props {
   projectSummaryList: ProjectSummary[];
   isEditMode: boolean;
+  onCancel: () => void;
 }
 
 export const EmployeeComponent: React.FunctionComponent<Props> = ({
   projectSummaryList,
   isEditMode,
+  onCancel,
 }) => {
   const [tab, setTab] = React.useState(0);
   return (
@@ -26,16 +28,21 @@ export const EmployeeComponent: React.FunctionComponent<Props> = ({
         <TabComponent label="Informes" />
       </TabListComponent>
       <TabPanelComponent value={tab} index={0}>
-        <DataComponent className={classes.root} isEditMode={isEditMode} />
+        <DataComponent
+          className={classes.root}
+          isEditMode={isEditMode}
+          onCancel={onCancel}
+        />
       </TabPanelComponent>
       <TabPanelComponent value={tab} index={1}>
         <ProjectComponent
           projectSummaryList={projectSummaryList}
           className={classes.root}
+          onCancel={onCancel}
         />
       </TabPanelComponent>
       <TabPanelComponent value={tab} index={2}>
-        <ReportComponent className={classes.root} />
+        <ReportComponent className={classes.root} onCancel={onCancel} />
       </TabPanelComponent>
     </>
   );
