@@ -4,8 +4,15 @@ import { Formik, Form } from 'formik';
 import { SelectComponent } from 'common/components';
 import * as classes from './report.styles';
 import { CommandFooterComponent } from 'common-app/command-footer';
+import { cx } from 'emotion';
 
-export const ReportComponent: React.FunctionComponent = () => {
+interface Props {
+  className?: string;
+}
+
+export const ReportComponent: React.FunctionComponent<Props> = ({
+  className,
+}) => {
   return (
     <Formik
       initialValues={{}}
@@ -14,7 +21,7 @@ export const ReportComponent: React.FunctionComponent = () => {
       validate={Promise.resolve}
     >
       {({ values }) => (
-        <Form className={classes.form}>
+        <Form className={cx(classes.form, className)}>
           <SelectComponent
             name="month"
             label="Mes"

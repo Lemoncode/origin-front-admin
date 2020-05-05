@@ -3,8 +3,15 @@ import { Formik, Form } from 'formik';
 import { TextFieldComponent, CheckboxComponent } from 'common/components';
 import { CommandFooterComponent } from '../../../common-app/command-footer';
 import * as classes from './data.styles';
+import { cx } from 'emotion';
 
-export const DataComponent: React.FunctionComponent = () => {
+interface Props {
+  className?: string;
+}
+
+export const DataComponent: React.FunctionComponent<Props> = ({
+  className,
+}) => {
   return (
     <Formik
       initialValues={{}}
@@ -13,7 +20,7 @@ export const DataComponent: React.FunctionComponent = () => {
       validate={Promise.resolve}
     >
       {({ values }) => (
-        <Form className={classes.form}>
+        <Form className={cx(classes.form, className)}>
           <TextFieldComponent
             label="Id"
             name="id"

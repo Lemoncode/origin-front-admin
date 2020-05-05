@@ -3,7 +3,7 @@ import { Project } from './project-list.api-model';
 export const mockProjectList: Project[] = [
   {
     id: '1',
-    active: true,
+    isActive: true,
     code: '23212',
     name: 'Bankia',
     lastDateIncurred: '02/02/2020',
@@ -11,7 +11,7 @@ export const mockProjectList: Project[] = [
   },
   {
     id: '2',
-    active: true,
+    isActive: true,
     code: '4323',
     name: 'Mapfre',
     lastDateIncurred: '05/02/2020',
@@ -19,7 +19,7 @@ export const mockProjectList: Project[] = [
   },
   {
     id: '3',
-    active: true,
+    isActive: true,
     code: '002',
     name: 'Vacaciones',
     lastDateIncurred: '05/02/2020',
@@ -27,7 +27,7 @@ export const mockProjectList: Project[] = [
   },
   {
     id: '4',
-    active: true,
+    isActive: true,
     code: '003',
     name: 'Baja Médica',
     lastDateIncurred: '05/03/2018',
@@ -35,7 +35,7 @@ export const mockProjectList: Project[] = [
   },
   {
     id: '5',
-    active: false,
+    isActive: false,
     code: '2586',
     name: 'Proyecto interno',
     lastDateIncurred: '05/08/2020',
@@ -43,7 +43,7 @@ export const mockProjectList: Project[] = [
   },
   {
     id: '6',
-    active: false,
+    isActive: false,
     code: '3025',
     name: 'BBVA',
     lastDateIncurred: '06/05/2020',
@@ -51,7 +51,7 @@ export const mockProjectList: Project[] = [
   },
   {
     id: '7',
-    active: false,
+    isActive: false,
     code: '8563',
     name: 'Baja Médica',
     lastDateIncurred: '02/08/2018',
@@ -59,7 +59,7 @@ export const mockProjectList: Project[] = [
   },
   {
     id: '8',
-    active: true,
+    isActive: true,
     code: '4125',
     name: 'Microsoft España',
     lastDateIncurred: '11/10/2018',

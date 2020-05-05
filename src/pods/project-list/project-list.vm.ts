@@ -1,6 +1,6 @@
 export interface Project {
   id: string;
-  active: boolean;
+  isActive: boolean;
   code: string;
   name: string;
   lastDateIncurred: string;

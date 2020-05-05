@@ -20,7 +20,7 @@ export const ProjectRowComponent: React.FunctionComponent<Props> = ({
   return (
     <RowComponent>
       <CellComponent>
-        <Checkbox checked={row.active} disabled />
+        <Checkbox checked={row.isActive} disabled />
       </CellComponent>
       <CellComponent>{row.code}</CellComponent>
       <CellComponent>{row.name}</CellComponent>
