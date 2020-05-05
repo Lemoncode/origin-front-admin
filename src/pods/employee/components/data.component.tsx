@@ -14,6 +14,7 @@ export const DataComponent: React.FunctionComponent<Props> = ({
   className,
   isEditMode,
 }) => {
+  console.log(isEditMode);
   return (
     <Formik
       initialValues={{}}
@@ -22,7 +23,7 @@ export const DataComponent: React.FunctionComponent<Props> = ({
       validate={Promise.resolve}
     >
       {({ values }) => (
-        <Form className={cx(classes.form, className)}>
+        <Form className={cx(classes.form({ isEditMode }), className)}>
           <TextFieldComponent
             label="Id"
             name="id"

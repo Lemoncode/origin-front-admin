@@ -1,17 +1,37 @@
 import { css } from 'emotion';
 import { theme } from 'core/theme';
 
-export const form = css`
+interface Props {
+  isEditMode: boolean;
+}
+
+const getDynamicAreaNames = (props: Props) => {
+  return props.isEditMode
+    ? `'id employeeName'`
+    : `'id temporalKey' 'employeeName .'`;
+};
+
+export const form = (props: Props) => css`
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: repeat(5, 1fr);
-  grid-template-areas: 'id' 'temporalKey' 'employeeName' 'email' 'isActive' 'commands' 'commands';
+  grid-template-areas:
+    'id'
+    ${props.isEditMode ? '' : `'temporalKey'`}
+    'employeeName'
+    'email'
+    'isActive'
+    'commands'
+    'commands';
   grid-column-gap: 1rem;
   grid-row-gap: 1rem;
 
   @media (min-width: ${theme.breakpoints.values.md}px) {
     grid-template-columns: 1fr 1fr;
-    grid-template-areas: 'id temporalKey' 'employeeName .' 'email .' 'isActive .' 'commands commands';
+    grid-template-areas:
+      ${getDynamicAreaNames(props)}
+      'email .'
+      'isActive .'
+      'commands commands';
   }
 `;
 
