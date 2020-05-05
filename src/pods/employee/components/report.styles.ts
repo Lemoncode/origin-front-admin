@@ -5,7 +5,7 @@ export const form = css`
   display: grid;
   grid-template-columns: 1fr;
   grid-template-areas: 'month' 'year' 'commands' 'commands';
-  grid-column-gap: 1rem;
+  grid-column-gap: ${theme.spacing(2)}px;
 
   @media (min-width: ${theme.breakpoints.values.md}px) {
     grid-template-columns: 1fr 1fr;

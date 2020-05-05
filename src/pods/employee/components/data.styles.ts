@@ -22,8 +22,8 @@ export const form = (props: Props) => css`
     'isActive'
     'commands'
     'commands';
-  grid-column-gap: 1rem;
-  grid-row-gap: 1rem;
+  grid-row-gap: ${theme.spacing(2)}px;
+  grid-column-gap: ${theme.spacing(3)}px;
 
   @media (min-width: ${theme.breakpoints.values.md}px) {
     grid-template-columns: 1fr 1fr;
