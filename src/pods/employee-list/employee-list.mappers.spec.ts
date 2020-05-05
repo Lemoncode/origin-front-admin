@@ -41,7 +41,7 @@ describe('./pods/employee-list', () => {
     const employeeList: apiModel.Employee[] = [
       {
         id: 'test id',
-        active: true,
+        isActive: true,
         name: 'test name',
         email: 'test@email.com',
         lastDateIncurred: '02/02/2020',
@@ -51,7 +51,7 @@ describe('./pods/employee-list', () => {
     const expectedResult: viewModel.Employee[] = [
       {
         id: 'test id',
-        active: true,
+        isActive: true,
         name: 'test name',
         email: 'test@email.com',
         lastDateIncurred: '02/02/2020',
@@ -70,14 +70,14 @@ describe('./pods/employee-list', () => {
     const employeeList: apiModel.Employee[] = [
       {
         id: 'test id 1',
-        active: true,
+        isActive: true,
         name: 'test name 1',
         email: 'test@email.com',
         lastDateIncurred: '02/02/2020',
       },
       {
         id: 'test id 2',
-        active: true,
+        isActive: true,
         name: 'test name 2',
         email: 'test@email.com',
         lastDateIncurred: '02/02/2020',
@@ -87,14 +87,14 @@ describe('./pods/employee-list', () => {
     const expectedResult: viewModel.Employee[] = [
       {
         id: 'test id 1',
-        active: true,
+        isActive: true,
         name: 'test name 1',
         email: 'test@email.com',
         lastDateIncurred: '02/02/2020',
       },
       {
         id: 'test id 2',
-        active: true,
+        isActive: true,
         name: 'test name 2',
         email: 'test@email.com',
         lastDateIncurred: '02/02/2020',

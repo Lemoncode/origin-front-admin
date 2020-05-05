@@ -1,6 +1,6 @@
 export interface Employee {
   id: string;
-  active: boolean;
+  isActive: boolean;
   name: string;
   email: string;
   lastDateIncurred: string;
