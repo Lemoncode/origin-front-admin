@@ -14,12 +14,41 @@ export const DataComponent: React.FunctionComponent = () => {
     >
       {({ values }) => (
         <Form className={classes.form}>
-          <TextFieldComponent label="Id" name="id" />
-          <TextFieldComponent label="Clave Temporal" name="temporalKey" />
-          <TextFieldComponent label="Nombre" name="name" />
-          <TextFieldComponent label="Email" name="email" />
-          <CheckboxComponent name="active" label="Activo" color="primary" />
-          <CommandFooterComponent onCancel={console.log} />
+          <TextFieldComponent
+            label="Id"
+            name="id"
+            className={classes.id}
+            disabled
+          />
+          <TextFieldComponent
+            label="Clave Temporal"
+            name="temporalKey"
+            className={classes.temporalKey}
+            disabled
+          />
+          <TextFieldComponent
+            label="Nombre"
+            name="name"
+            className={classes.name}
+            disabled
+          />
+          <TextFieldComponent
+            label="Email"
+            name="email"
+            className={classes.email}
+            disabled
+          />
+          <CheckboxComponent
+            name="active"
+            label="Activo"
+            color="primary"
+            className={classes.isActive}
+            disabled
+          />
+          <CommandFooterComponent
+            onCancel={console.log}
+            className={classes.commands}
+          />
         </Form>
       )}
     </Formik>
