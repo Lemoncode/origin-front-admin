@@ -7,10 +7,12 @@ import { cx } from 'emotion';
 
 interface Props {
   className?: string;
+  isEditMode: boolean;
 }
 
 export const DataComponent: React.FunctionComponent<Props> = ({
   className,
+  isEditMode,
 }) => {
   return (
     <Formik
@@ -27,12 +29,14 @@ export const DataComponent: React.FunctionComponent<Props> = ({
             className={classes.id}
             disabled
           />
-          <TextFieldComponent
-            label="Clave Temporal"
-            name="temporalKey"
-            className={classes.temporalKey}
-            disabled
-          />
+          {!isEditMode && (
+            <TextFieldComponent
+              label="Clave Temporal"
+              name="temporalKey"
+              className={classes.temporalKey}
+              disabled
+            />
+          )}
           <TextFieldComponent
             label="Nombre"
             name="name"

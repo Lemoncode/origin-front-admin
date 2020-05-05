@@ -10,10 +10,12 @@ import * as classes from './employee.styles';
 
 interface Props {
   projectSummaryList: ProjectSummary[];
+  isEditMode: boolean;
 }
 
 export const EmployeeComponent: React.FunctionComponent<Props> = ({
   projectSummaryList,
+  isEditMode,
 }) => {
   const [tab, setTab] = React.useState(0);
   return (
@@ -24,7 +26,7 @@ export const EmployeeComponent: React.FunctionComponent<Props> = ({
         <TabComponent label="Informes" />
       </TabListComponent>
       <TabPanelComponent value={tab} index={0}>
-        <DataComponent className={classes.root} />
+        <DataComponent className={classes.root} isEditMode={isEditMode} />
       </TabPanelComponent>
       <TabPanelComponent value={tab} index={1}>
         <ProjectComponent

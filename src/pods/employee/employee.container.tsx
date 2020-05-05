@@ -1,17 +1,18 @@
 import React from 'react';
 import { EmployeeComponent } from './employee.component';
-import { useHistory } from 'react-router-dom';
 import { ProjectSummary } from './employee.vm';
 import { useSnackbarContext } from 'common/components';
 import { trackPromise } from 'react-promise-tracker';
 import { getProjectSummary } from './api';
 import { mapProjectSummaryListFromApiToVm } from './employee.mappers';
+import { useParams } from 'react-router-dom';
+import { isEditModeHelper } from 'common/helpers';
 
 export const EmployeeContainer: React.FunctionComponent = () => {
+  const { id } = useParams();
   const [projectSummaryList, setProjectSummaryList] = React.useState<
     ProjectSummary[]
   >([]);
-  const history = useHistory();
   const { showMessage } = useSnackbarContext();
 
   const onLoadProjectSummary = async () => {
@@ -31,5 +32,10 @@ export const EmployeeContainer: React.FunctionComponent = () => {
     onLoadProjectSummary();
   }, []);
 
-  return <EmployeeComponent projectSummaryList={projectSummaryList} />;
+  return (
+    <EmployeeComponent
+      projectSummaryList={projectSummaryList}
+      isEditMode={isEditModeHelper(id)}
+    />
+  );
 };
