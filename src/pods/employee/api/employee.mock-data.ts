@@ -1,6 +1,6 @@
-import { ProjectSummary } from './employee.api-model';
+import { Employee, ProjectSummary } from './employee.api-model';
 
-export const mockProjectSummaryList: ProjectSummary[] = [
+const mockProjectSummaryList: ProjectSummary[] = [
   {
     id: '1',
     isAssigned: true,
@@ -22,3 +22,12 @@ export const mockProjectSummaryList: ProjectSummary[] = [
     employeeName: 'Baja',
   },
 ];
+
+export const mockEmployee: Employee = {
+  id: '1',
+  name: 'Prueba Nombre',
+  email: 'prueba@email.com',
+  isActive: true,
+  temporalKey: 'clave',
+  projects: mockProjectSummaryList,
+};

@@ -4,33 +4,40 @@ import { TextFieldComponent, CheckboxComponent } from 'common/components';
 import { CommandFooterComponent } from '../../../common-app/command-footer';
 import * as classes from './data.styles';
 import { cx } from 'emotion';
+import { Employee } from '../employee.vm';
 
 interface Props {
+  employee: Employee;
   className?: string;
+  onSave: (employee: Employee) => void;
   isEditMode: boolean;
   onCancel: () => void;
 }
 
 export const DataComponent: React.FunctionComponent<Props> = ({
+  employee,
   className,
+  onSave,
   isEditMode,
   onCancel,
 }) => {
-  console.log(isEditMode);
+  console.log(employee);
   return (
     <Formik
-      initialValues={{}}
+      initialValues={employee}
       enableReinitialize={true}
-      onSubmit={console.log}
-      validate={Promise.resolve}
+      onSubmit={onSave}
     >
-      {({ values }) => (
+      {() => (
         <Form className={cx(classes.form({ isEditMode }), className)}>
           <TextFieldComponent
             label="Id"
             name="id"
             className={classes.id}
-            disabled
+            InputProps={{
+              readOnly: true,
+            }}
+            value={employee.id}
           />
           {!isEditMode && (
             <TextFieldComponent
@@ -38,6 +45,7 @@ export const DataComponent: React.FunctionComponent<Props> = ({
               name="temporalKey"
               className={classes.temporalKey}
               disabled
+              value={employee.temporalKey}
             />
           )}
           <TextFieldComponent
@@ -45,19 +53,22 @@ export const DataComponent: React.FunctionComponent<Props> = ({
             name="name"
             className={classes.name}
             disabled
+            value={employee.name}
           />
           <TextFieldComponent
             label="Email"
             name="email"
             className={classes.email}
             disabled
+            value={employee.email}
           />
           <CheckboxComponent
-            name="active"
+            name="isActive"
             label="Activo"
             color="primary"
             className={classes.isActive}
             disabled
+            value={employee.isActive}
           />
           <CommandFooterComponent
             onCancel={onCancel}

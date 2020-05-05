@@ -1,5 +1,4 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
 import { Formik, Form } from 'formik';
 import { SelectComponent } from 'common/components';
 import * as classes from './report.styles';
@@ -9,18 +8,19 @@ import { cx } from 'emotion';
 interface Props {
   className?: string;
   onCancel: () => void;
+  onGenerateExcel: () => void;
 }
 
 export const ReportComponent: React.FunctionComponent<Props> = ({
   className,
   onCancel,
+  onGenerateExcel,
 }) => {
   return (
     <Formik
       initialValues={{}}
       enableReinitialize={true}
-      onSubmit={console.log}
-      validate={Promise.resolve}
+      onSubmit={onGenerateExcel}
     >
       {({ values }) => (
         <Form className={cx(classes.form, className)}>

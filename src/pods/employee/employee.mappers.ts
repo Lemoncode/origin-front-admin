@@ -8,7 +8,18 @@ const mapProjectSummaryFromApiToVm = (
   ...projectSummary,
 });
 
-export const mapProjectSummaryListFromApiToVm = (
+const mapProjectSummaryListFromApiToVm = (
   projectSummary: apiModel.ProjectSummary[]
 ): viewModel.ProjectSummary[] =>
   mapToCollection(projectSummary, ps => mapProjectSummaryFromApiToVm(ps));
+
+export const mapEmployeeFromApiToVm = (
+  employee: apiModel.Employee
+): viewModel.Employee => {
+  return Boolean(employee)
+    ? {
+        ...employee,
+        projects: mapProjectSummaryListFromApiToVm(employee.projects),
+      }
+    : viewModel.createEmptyEmployee();
+};

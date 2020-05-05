@@ -1,8 +1,6 @@
-import { ProjectSummary } from './employee.api-model';
-import { mockProjectSummaryList } from './employee.mock-data';
+import { Employee } from './employee.api-model';
+import { mockEmployee } from './employee.mock-data';
 
-const projectList = [...mockProjectSummaryList];
-
-export const getProjectSummary = async (): Promise<ProjectSummary[]> => {
-  return projectList;
+export const getEmployeeById = async (id: string): Promise<Employee> => {
+  return mockEmployee;
 };
