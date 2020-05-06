@@ -5,6 +5,11 @@ import {
   TabPanelComponent,
 } from 'common/components';
 import { AppBar } from '@material-ui/core';
+import {
+  DataComponent,
+  EmployeeComponent,
+  ReportComponent,
+} from './components';
 
 export const ProjectComponent: React.FunctionComponent = () => {
   const [tab, setTab] = React.useState(0);
@@ -18,13 +23,13 @@ export const ProjectComponent: React.FunctionComponent = () => {
         </TabListComponent>
       </AppBar>
       <TabPanelComponent value={tab} index={0}>
-        Hello Data component
+        <DataComponent />
       </TabPanelComponent>
       <TabPanelComponent value={tab} index={1}>
-        Hello Employee component
+        <EmployeeComponent />
       </TabPanelComponent>
       <TabPanelComponent value={tab} index={2}>
-        Hello Report component
+        <ReportComponent />
       </TabPanelComponent>
     </>
   );
