@@ -21,7 +21,7 @@ export const ProjectListComponent: React.FunctionComponent<Props> = ({
   onDelete,
 }) => {
   const { filteredList, onSearch, search } = useSearchBar(projectList, [
-    'projectName',
+    'name',
   ]);
 
   const contentRender = ({ itemName }) => {

@@ -41,7 +41,7 @@ describe('./pods/project-list', () => {
     const projectList: apiModel.Project[] = [
       {
         id: 'test id',
-        active: true,
+        isActive: true,
         code: 'test code',
         name: 'test project name',
         lastDateIncurred: '02/02/2020',
@@ -52,7 +52,7 @@ describe('./pods/project-list', () => {
     const expectedResult: viewModel.Project[] = [
       {
         id: 'test id',
-        active: true,
+        isActive: true,
         code: 'test code',
         name: 'test project name',
         lastDateIncurred: '02/02/2020',
@@ -72,7 +72,7 @@ describe('./pods/project-list', () => {
     const projectList: apiModel.Project[] = [
       {
         id: 'test id 1',
-        active: true,
+        isActive: true,
         code: 'test code',
         name: 'test project name 1',
         lastDateIncurred: '02/02/2020',
@@ -80,7 +80,7 @@ describe('./pods/project-list', () => {
       },
       {
         id: 'test id 2',
-        active: false,
+        isActive: false,
         code: 'test code',
         name: 'test project name 2',
         lastDateIncurred: '02/11/2020',
@@ -91,7 +91,7 @@ describe('./pods/project-list', () => {
     const expectedResult: viewModel.Project[] = [
       {
         id: 'test id 1',
-        active: true,
+        isActive: true,
         code: 'test code',
         name: 'test project name 1',
         lastDateIncurred: '02/02/2020',
@@ -99,7 +99,7 @@ describe('./pods/project-list', () => {
       },
       {
         id: 'test id 2',
-        active: false,
+        isActive: false,
         code: 'test code',
         name: 'test project name 2',
         lastDateIncurred: '02/11/2020',
