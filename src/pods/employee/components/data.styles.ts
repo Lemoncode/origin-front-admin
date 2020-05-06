@@ -8,7 +8,7 @@ interface Props {
 const getDynamicAreaNames = (props: Props) => {
   return props.isEditMode
     ? `'id employeeName'`
-    : `'id temporalKey' 'employeeName .'`;
+    : `'id temporalPassword' 'employeeName .'`;
 };
 
 export const form = (props: Props) => css`
@@ -16,7 +16,7 @@ export const form = (props: Props) => css`
   grid-template-columns: 1fr;
   grid-template-areas:
     'id'
-    ${props.isEditMode ? '' : `'temporalKey'`}
+    ${props.isEditMode ? '' : `'temporalPassword'`}
     'employeeName'
     'email'
     'isActive'
@@ -39,8 +39,8 @@ export const id = css`
   grid-area: id;
 `;
 
-export const temporalKey = css`
-  grid-area: temporalKey;
+export const temporalPassword = css`
+  grid-area: temporalPassword;
 `;
 
 export const name = css`

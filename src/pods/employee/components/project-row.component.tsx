@@ -15,7 +15,7 @@ export const EmployeeRowComponent: React.FunctionComponent<Props> = ({
   return (
     <RowComponent>
       <CellComponent>
-        <Checkbox checked={row.isAssigned} disabled />
+        <Checkbox checked={row.isAssigned} color="primary" />
       </CellComponent>
       <CellComponent>{row.employeeName}</CellComponent>
     </RowComponent>

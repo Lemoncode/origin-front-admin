@@ -1,6 +1,7 @@
 import React from 'react';
 import { Formik, Form } from 'formik';
 import { SelectComponent } from 'common/components';
+import { monthList } from 'common/constants';
 import * as classes from './report.styles';
 import { CommandFooterComponent } from 'common-app/command-footer';
 import { cx } from 'emotion';
@@ -27,16 +28,21 @@ export const ReportComponent: React.FunctionComponent<Props> = ({
           <SelectComponent
             name="month"
             label="Mes"
-            items={[]}
-            disabled
+            items={monthList}
             className={classes.month}
+            disabled
           />
           <SelectComponent
             name="year"
             label="Año"
-            items={[]}
-            disabled
+            items={[
+              {
+                id: '2020',
+                name: '2020',
+              },
+            ]}
             className={classes.year}
+            disabled
           />
           <CommandFooterComponent
             onCancel={onCancel}

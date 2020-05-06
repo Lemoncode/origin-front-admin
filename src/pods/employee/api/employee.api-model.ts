@@ -3,12 +3,12 @@ export interface Employee {
   name: string;
   email: string;
   isActive: boolean;
-  temporalKey: string;
-  projects: ProjectSummary[];
+  temporalPassword?: string;
+  projects?: ProjectSummary[];
 }
 
 export interface ProjectSummary {
   id: string;
-  isAssigned: boolean;
+  isAssigned?: boolean;
   employeeName: string;
 }

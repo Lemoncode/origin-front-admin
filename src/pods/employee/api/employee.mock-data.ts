@@ -28,6 +28,6 @@ export const mockEmployee: Employee = {
   name: 'Prueba Nombre',
   email: 'prueba@email.com',
   isActive: true,
-  temporalKey: 'clave',
+  temporalPassword: 'admin',
   projects: mockProjectSummaryList,
 };

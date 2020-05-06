@@ -3,13 +3,13 @@ export interface Employee {
   name: string;
   email: string;
   isActive: boolean;
-  temporalKey: string;
+  temporalPassword?: string;
   projects: ProjectSummary[];
 }
 
 export interface ProjectSummary {
   id: string;
-  isAssigned: boolean;
+  isAssigned?: boolean;
   employeeName: string;
 }
 
@@ -18,6 +18,6 @@ export const createEmptyEmployee = (): Employee => ({
   name: '',
   email: '',
   isActive: false,
-  temporalKey: '',
+  temporalPassword: '',
   projects: [],
 });
