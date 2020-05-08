@@ -2,10 +2,21 @@ import React from 'react';
 import { Formik, Form } from 'formik';
 import { TextFieldComponent, CheckboxComponent } from 'common/components';
 import { CommandFooterComponent } from '../../../common-app/command-footer';
+import { Project } from '../project.vm';
 
-export const DataComponent: React.FunctionComponent = () => {
+interface Props {
+  project: Project;
+  onSave: (project: Project) => void;
+  onCancel: () => void;
+}
+
+export const DataComponent: React.FunctionComponent<Props> = ({
+  project,
+  onSave,
+  onCancel,
+}) => {
   return (
-    <Formik initialValues={{}} enableReinitialize={true} onSubmit={console.log}>
+    <Formik initialValues={project} enableReinitialize={true} onSubmit={onSave}>
       {() => (
         <Form>
           <TextFieldComponent
@@ -19,6 +30,7 @@ export const DataComponent: React.FunctionComponent = () => {
           <TextFieldComponent label="Id Externo" name="externalId" />
           <TextFieldComponent label="Comentarios" name="comments" multiline />
           <CheckboxComponent label="Activo" name="isActive" color="primary" />
+          <CommandFooterComponent onCancel={onCancel} />
         </Form>
       )}
     </Formik>

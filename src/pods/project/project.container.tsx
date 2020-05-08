@@ -25,6 +25,14 @@ export const ProjectContainer: React.FunctionComponent = () => {
     }
   };
 
+  const handleSave = (Project: Project) => {
+    console.log('Guardado');
+  };
+
+  const handleCancel = () => {
+    history.back();
+  };
+
   React.useEffect(() => {
     const isEditMode = isEditModeHelper(id);
     setIsEditMode(isEditMode);
@@ -33,5 +41,12 @@ export const ProjectContainer: React.FunctionComponent = () => {
     }
   }, []);
 
-  return <ProjectComponent isEditMode={isEditMode} />;
+  return (
+    <ProjectComponent
+      isEditMode={isEditMode}
+      project={project}
+      onSave={handleSave}
+      onCancel={handleCancel}
+    />
+  );
 };

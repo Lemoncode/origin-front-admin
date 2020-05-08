@@ -4,7 +4,13 @@ import { SelectComponent } from 'common/components';
 import { monthList } from 'common/constants';
 import { CommandFooterComponent } from 'common-app/command-footer';
 
-export const ReportComponent: React.FunctionComponent = () => {
+interface Props {
+  onCancel: () => void;
+}
+
+export const ReportComponent: React.FunctionComponent<Props> = ({
+  onCancel,
+}) => {
   return (
     <Formik initialValues={{}} enableReinitialize={true} onSubmit={console.log}>
       {() => (
@@ -27,7 +33,7 @@ export const ReportComponent: React.FunctionComponent = () => {
             disabled
           />
           <CommandFooterComponent
-            onCancel={console.log}
+            onCancel={onCancel}
             labels={{ saveButton: 'Generar', cancelButton: 'Cancelar' }}
           />
         </Form>

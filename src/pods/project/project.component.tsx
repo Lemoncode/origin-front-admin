@@ -10,13 +10,20 @@ import {
   EmployeeComponent,
   ReportComponent,
 } from './components';
+import { Project } from './project.vm';
 
 interface Props {
   isEditMode: boolean;
+  project: Project;
+  onSave: (project: Project) => void;
+  onCancel: () => void;
 }
 
 export const ProjectComponent: React.FunctionComponent<Props> = ({
   isEditMode,
+  project,
+  onSave,
+  onCancel,
 }) => {
   const [tab, setTab] = React.useState(0);
   return (
@@ -29,13 +36,16 @@ export const ProjectComponent: React.FunctionComponent<Props> = ({
         </TabListComponent>
       </AppBar>
       <TabPanelComponent value={tab} index={0}>
-        <DataComponent />
+        <DataComponent project={project} onCancel={onCancel} onSave={onSave} />
       </TabPanelComponent>
       <TabPanelComponent value={tab} index={1}>
-        <EmployeeComponent />
+        <EmployeeComponent
+          employeeSummaryList={project.employees}
+          onCancel={onCancel}
+        />
       </TabPanelComponent>
       <TabPanelComponent value={tab} index={2}>
-        <ReportComponent />
+        <ReportComponent onCancel={onCancel} />
       </TabPanelComponent>
     </>
   );
