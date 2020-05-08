@@ -24,8 +24,8 @@ export const ProjectComponent: React.FunctionComponent<Props> = ({
       <AppBar position="static">
         <TabListComponent value={tab} onChange={setTab}>
           <TabComponent label="Datos" />
-          <TabComponent label="Empleados" disabled={isEditMode} />
-          <TabComponent label="Informes" disabled={isEditMode} />
+          <TabComponent label="Empleados" disabled={!isEditMode} />
+          <TabComponent label="Informes" disabled={!isEditMode} />
         </TabListComponent>
       </AppBar>
       <TabPanelComponent value={tab} index={0}>

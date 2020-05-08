@@ -29,5 +29,5 @@ export const mockProject: Project = {
   isActive: true,
   comments: 'Comentario',
   externalId: '1234',
-  emplyees: mockEmployeeSummaryList,
+  employees: mockEmployeeSummaryList,
 };

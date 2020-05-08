@@ -4,7 +4,7 @@ export interface Project {
   externalId?: string;
   comments?: string;
   isActive: boolean;
-  emplyees: ProloyeeSummary[];
+  employees: ProloyeeSummary[];
 }
 
 export interface ProloyeeSummary {
@@ -19,5 +19,5 @@ export const createEmptyProject = (): Project => ({
   externalId: '',
   comments: '',
   isActive: false,
-  emplyees: [],
+  employees: [],
 });
