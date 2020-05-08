@@ -3,22 +3,22 @@ import { Project, EmployeeSummary } from './project.api-model';
 const mockEmployeeSummaryList: EmployeeSummary[] = [
   {
     id: '1',
-    employeeName: 'Daniel Perez',
+    employeeId: 'Daniel Perez',
     isAssigned: true,
   },
   {
     id: '2',
-    employeeName: 'Jose Sanchez',
+    employeeId: 'Jose Sanchez',
     isAssigned: false,
   },
   {
     id: '3',
-    employeeName: 'Javier Benitez',
+    employeeId: 'Javier Benitez',
     isAssigned: false,
   },
   {
     id: '4',
-    employeeName: 'María Peña',
+    employeeId: 'María Peña',
     isAssigned: true,
   },
 ];

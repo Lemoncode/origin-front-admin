@@ -5,11 +5,11 @@ import {
   CellComponent,
 } from 'common/components';
 import Checkbox from '@material-ui/core/Checkbox';
-import { ProjectSummary } from '../employee.vm';
+import { EmployeeSummary } from '../project.vm';
 
-type Props = RowRendererProps<ProjectSummary>;
+type Props = RowRendererProps<EmployeeSummary>;
 
-export const EmployeeRowComponent: React.FunctionComponent<Props> = ({
+export const ProjectRowComponent: React.FunctionComponent<Props> = ({
   row,
 }) => {
   return (
@@ -17,7 +17,7 @@ export const EmployeeRowComponent: React.FunctionComponent<Props> = ({
       <CellComponent>
         <Checkbox checked={row.isAssigned} color="primary" />
       </CellComponent>
-      <CellComponent>{row.projectName}</CellComponent>
+      <CellComponent>{row.employeeName}</CellComponent>
     </RowComponent>
   );
 };
