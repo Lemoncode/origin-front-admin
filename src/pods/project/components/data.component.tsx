@@ -8,17 +8,19 @@ interface Props {
   project: Project;
   onSave: (project: Project) => void;
   onCancel: () => void;
+  className: string;
 }
 
 export const DataComponent: React.FunctionComponent<Props> = ({
   project,
   onSave,
   onCancel,
+  className,
 }) => {
   return (
     <Formik initialValues={project} enableReinitialize={true} onSubmit={onSave}>
       {() => (
-        <Form>
+        <Form className={className}>
           <TextFieldComponent
             label="Id"
             name="id"

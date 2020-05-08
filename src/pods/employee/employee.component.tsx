@@ -4,6 +4,7 @@ import {
   TabListComponent,
   TabPanelComponent,
 } from 'common/components';
+import AppBar from '@material-ui/core/AppBar';
 import { DataComponent, ProjectComponent, ReportComponent } from './components';
 import { Employee } from './employee.vm';
 import * as classes from './employee.styles';
@@ -26,11 +27,13 @@ export const EmployeeComponent: React.FunctionComponent<Props> = ({
   const [tab, setTab] = React.useState(0);
   return (
     <>
-      <TabListComponent value={tab} onChange={setTab}>
-        <TabComponent label="Datos" />
-        <TabComponent label="Proyectos" disabled={!isEditMode} />
-        <TabComponent label="Informes" disabled={!isEditMode} />
-      </TabListComponent>
+      <AppBar position="static">
+        <TabListComponent value={tab} onChange={setTab}>
+          <TabComponent label="Datos" />
+          <TabComponent label="Proyectos" disabled={!isEditMode} />
+          <TabComponent label="Informes" disabled={!isEditMode} />
+        </TabListComponent>
+      </AppBar>
       <TabPanelComponent value={tab} index={0}>
         <DataComponent
           employee={employee}

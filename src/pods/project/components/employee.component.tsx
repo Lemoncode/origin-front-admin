@@ -7,17 +7,20 @@ import { ProjectRowComponent } from './employee-row.component';
 interface Props {
   employeeSummaryList: EmployeeSummary[];
   onCancel: () => void;
+  className: string;
 }
 
 export const EmployeeComponent: React.FunctionComponent<Props> = ({
   employeeSummaryList,
   onCancel,
+  className,
 }) => {
   return (
     <>
       <TableContainer
-        columns={['Asignado', 'Proyecto']}
+        columns={['Asignado', 'Empleado']}
         rows={employeeSummaryList}
+        className={className}
         rowRenderer={(rowProps: RowRendererProps<EmployeeSummary>) => (
           <ProjectRowComponent {...rowProps} />
         )}

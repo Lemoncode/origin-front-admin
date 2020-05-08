@@ -4,13 +4,14 @@ import {
   TabListComponent,
   TabPanelComponent,
 } from 'common/components';
-import { AppBar } from '@material-ui/core';
+import AppBar from '@material-ui/core/AppBar';
 import {
   DataComponent,
   EmployeeComponent,
   ReportComponent,
 } from './components';
 import { Project } from './project.vm';
+import * as classes from './project.styles';
 
 interface Props {
   isEditMode: boolean;
@@ -36,16 +37,22 @@ export const ProjectComponent: React.FunctionComponent<Props> = ({
         </TabListComponent>
       </AppBar>
       <TabPanelComponent value={tab} index={0}>
-        <DataComponent project={project} onCancel={onCancel} onSave={onSave} />
+        <DataComponent
+          project={project}
+          onCancel={onCancel}
+          onSave={onSave}
+          className={classes.root}
+        />
       </TabPanelComponent>
       <TabPanelComponent value={tab} index={1}>
         <EmployeeComponent
           employeeSummaryList={project.employees}
           onCancel={onCancel}
+          className={classes.root}
         />
       </TabPanelComponent>
       <TabPanelComponent value={tab} index={2}>
-        <ReportComponent onCancel={onCancel} />
+        <ReportComponent onCancel={onCancel} className={classes.root} />
       </TabPanelComponent>
     </>
   );

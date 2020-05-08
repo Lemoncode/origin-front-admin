@@ -10,5 +10,5 @@ export interface Project {
 export interface EmployeeSummary {
   id: string;
   isAssigned?: boolean;
-  employeeId: string;
+  employeeName: string;
 }
