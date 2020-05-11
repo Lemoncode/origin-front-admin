@@ -16,14 +16,14 @@ export const EmployeeContainer: React.FunctionComponent = () => {
   const [isEditMode, setIsEditMode] = React.useState<boolean>(false);
   const { showMessage } = useSnackbarContext();
 
-  const onLoadProjectSummary = async () => {
+  const onLoadEmployee = async () => {
     try {
       const apiEmployee = await trackPromise(getEmployeeById(id));
       const viewModelEmployee = mapEmployeeFromApiToVm(apiEmployee);
       setEmployee(viewModelEmployee);
     } catch (error) {
       error &&
-        showMessage('Ha ocurrido un error al cargar los proyectos', 'error');
+        showMessage('Ha ocurrido un error al cargar el empleado', 'error');
     }
   };
 
@@ -44,7 +44,7 @@ export const EmployeeContainer: React.FunctionComponent = () => {
     const isEditMode = isEditModeHelper(id);
     setIsEditMode(isEditMode);
     if (isEditMode) {
-      onLoadProjectSummary();
+      onLoadEmployee();
     }
   }, []);
 

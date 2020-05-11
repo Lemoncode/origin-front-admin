@@ -4,22 +4,22 @@ const mockProjectSummaryList: ProjectSummary[] = [
   {
     id: '1',
     isAssigned: true,
-    employeeName: 'Mapfre',
+    projectName: 'Mapfre',
   },
   {
     id: '2',
     isAssigned: false,
-    employeeName: 'Bankia',
+    projectName: 'Bankia',
   },
   {
     id: '3',
     isAssigned: false,
-    employeeName: 'Vacaciones',
+    projectName: 'Vacaciones',
   },
   {
     id: '4',
     isAssigned: true,
-    employeeName: 'Baja',
+    projectName: 'Baja',
   },
 ];
 
