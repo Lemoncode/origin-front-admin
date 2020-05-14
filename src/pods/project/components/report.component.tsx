@@ -5,25 +5,35 @@ import { monthList } from 'common/constants';
 import { CommandFooterComponent } from 'common-app/command-footer';
 import { cx } from 'emotion';
 import * as classes from './report.styles';
+import { formValidation } from './report.validations';
+import { Report } from '../project.vm';
 
 interface Props {
+  report: Report;
   onCancel: () => void;
   className: string;
+  onGenerateExcel: (report: Report) => void;
 }
 
 export const ReportComponent: React.FunctionComponent<Props> = ({
+  report,
+  onGenerateExcel,
   onCancel,
   className,
 }) => {
   return (
-    <Formik initialValues={{}} enableReinitialize={true} onSubmit={console.log}>
+    <Formik
+      initialValues={report}
+      enableReinitialize={true}
+      onSubmit={onGenerateExcel}
+      validate={formValidation.validateForm}
+    >
       {() => (
         <Form className={cx(classes.form, className)}>
           <SelectComponent
             name="month"
             label="Mes"
             items={monthList}
-            disabled
             className={classes.month}
           />
           <SelectComponent
@@ -35,7 +45,6 @@ export const ReportComponent: React.FunctionComponent<Props> = ({
                 name: '2020',
               },
             ]}
-            disabled
             className={classes.year}
           />
           <CommandFooterComponent
