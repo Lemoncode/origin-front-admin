@@ -4,20 +4,13 @@ import { matchField } from '@lemoncode/fonk-match-field-validator';
 
 export const validationSchema: ValidationSchema = {
   field: {
-    name: [
-      {
-        validator: Validators.required,
-        message: 'Campo obligatorio',
-      },
-    ],
+    name: [Validators.required],
     email: [
       {
         validator: Validators.email,
-        message: 'Introduce un email válido',
       },
       {
         validator: Validators.required,
-        message: 'Campo obligatorio',
       },
     ],
     temporalPassword: [
