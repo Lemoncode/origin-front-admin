@@ -12,7 +12,7 @@ interface Props {
   report: Report;
   className?: string;
   onCancel: () => void;
-  onGenerateExcel: () => void;
+  onGenerateExcel: (report: Report) => void;
 }
 
 export const ReportComponent: React.FunctionComponent<Props> = ({

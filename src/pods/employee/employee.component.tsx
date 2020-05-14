@@ -15,7 +15,7 @@ interface Props {
   report: Report;
   onSave: (employee: Employee) => void;
   onCancel: () => void;
-  onGenerateExcel: () => void;
+  onGenerateExcel: (report: Report) => void;
 }
 
 export const EmployeeComponent: React.FunctionComponent<Props> = ({

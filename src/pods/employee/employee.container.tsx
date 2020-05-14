@@ -41,7 +41,7 @@ export const EmployeeContainer: React.FunctionComponent = () => {
     history.back();
   };
 
-  const handleGenerateExcel = () => {
+  const handleGenerateExcel = (report: Report) => {
     // Pending to create real implementation
     console.log('Excel creado');
   };
