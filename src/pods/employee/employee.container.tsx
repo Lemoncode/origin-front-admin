@@ -1,6 +1,11 @@
 import React from 'react';
 import { EmployeeComponent } from './employee.component';
-import { Employee, createEmptyEmployee } from './employee.vm';
+import {
+  Employee,
+  Report,
+  createEmptyEmployee,
+  createEmptyReport,
+} from './employee.vm';
 import { useSnackbarContext } from 'common/components';
 import { trackPromise } from 'react-promise-tracker';
 import { getEmployeeById } from './api';
@@ -14,6 +19,7 @@ export const EmployeeContainer: React.FunctionComponent = () => {
     createEmptyEmployee()
   );
   const [isEditMode, setIsEditMode] = React.useState<boolean>(false);
+  const [report, setReport] = React.useState<Report>(createEmptyReport());
   const { showMessage } = useSnackbarContext();
 
   const onLoadEmployee = async () => {
@@ -35,7 +41,7 @@ export const EmployeeContainer: React.FunctionComponent = () => {
     history.back();
   };
 
-  const handleGenerateExcel = () => {
+  const handleGenerateExcel = (report: Report) => {
     // Pending to create real implementation
     console.log('Excel creado');
   };
@@ -52,6 +58,7 @@ export const EmployeeContainer: React.FunctionComponent = () => {
     <EmployeeComponent
       employee={employee}
       isEditMode={isEditMode}
+      report={report}
       onSave={handleSave}
       onCancel={handleCancel}
       onGenerateExcel={handleGenerateExcel}

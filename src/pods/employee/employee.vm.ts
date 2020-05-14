@@ -13,6 +13,11 @@ export interface ProjectSummary {
   projectName: string;
 }
 
+export interface Report {
+  month: string;
+  year: string;
+}
+
 export const createEmptyEmployee = (): Employee => ({
   id: '',
   name: '',
@@ -20,4 +25,9 @@ export const createEmptyEmployee = (): Employee => ({
   isActive: false,
   temporalPassword: '',
   projects: [],
+});
+
+export const createEmptyReport = (): Report => ({
+  month: '',
+  year: '',
 });
