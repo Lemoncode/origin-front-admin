@@ -1,6 +1,6 @@
 import { ValidationSchema, Validators } from '@lemoncode/fonk';
 import { createFormikValidation } from '@lemoncode/fonk-formik';
-import { matchField } from '@lemoncode/fonk-match-field-validator';
+import { requiredByField } from '@lemoncode/fonk-required-by-field-validator';
 
 export const validationSchema: ValidationSchema = {
   field: {
@@ -15,7 +15,7 @@ export const validationSchema: ValidationSchema = {
     ],
     temporalPassword: [
       {
-        validator: matchField.validator,
+        validator: requiredByField.validator,
         customArgs: { field: 'password' },
       },
     ],
