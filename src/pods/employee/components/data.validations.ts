@@ -16,7 +16,10 @@ export const validationSchema: ValidationSchema = {
     temporalPassword: [
       {
         validator: requiredByField.validator,
-        customArgs: { field: 'password' },
+        customArgs: {
+          field: 'id',
+          condition: fieldValue => fieldValue === '',
+        },
       },
     ],
   },
