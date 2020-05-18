@@ -3,18 +3,8 @@ import { createFormikValidation } from '@lemoncode/fonk-formik';
 
 const validationSchema: ValidationSchema = {
   field: {
-    name: [
-      {
-        validator: Validators.required,
-        message: 'Campo obligatorio',
-      },
-    ],
-    externalId: [
-      {
-        validator: Validators.required,
-        message: 'Campo obligatorio',
-      },
-    ],
+    name: [Validators.required],
+    externalId: [Validators.required],
   },
 };
 
