@@ -1,29 +1,25 @@
 import { ValidationSchema, Validators } from '@lemoncode/fonk';
 import { createFormikValidation } from '@lemoncode/fonk-formik';
-import { matchField } from '@lemoncode/fonk-match-field-validator';
+import { requiredByField } from '@lemoncode/fonk-required-by-field-validator';
 
 export const validationSchema: ValidationSchema = {
   field: {
-    name: [
-      {
-        validator: Validators.required,
-        message: 'Campo obligatorio',
-      },
-    ],
+    name: [Validators.required],
     email: [
       {
         validator: Validators.email,
-        message: 'Introduce un email válido',
       },
       {
         validator: Validators.required,
-        message: 'Campo obligatorio',
       },
     ],
     temporalPassword: [
       {
-        validator: matchField.validator,
-        customArgs: { field: 'password' },
+        validator: requiredByField.validator,
+        customArgs: {
+          field: 'id',
+          condition: fieldValue => fieldValue === '',
+        },
       },
     ],
   },
