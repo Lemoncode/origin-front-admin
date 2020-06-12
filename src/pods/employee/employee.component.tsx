@@ -6,20 +6,22 @@ import {
 } from 'common/components';
 import AppBar from '@material-ui/core/AppBar';
 import { DataComponent, ProjectComponent, ReportComponent } from './components';
-import { Employee } from './employee.vm';
+import { Employee, Report } from './employee.vm';
 import * as classes from './employee.styles';
 
 interface Props {
   employee: Employee;
   isEditMode: boolean;
+  report: Report;
   onSave: (employee: Employee) => void;
   onCancel: () => void;
-  onGenerateExcel: () => void;
+  onGenerateExcel: (report: Report) => void;
 }
 
 export const EmployeeComponent: React.FunctionComponent<Props> = ({
   employee,
   isEditMode,
+  report,
   onSave,
   onCancel,
   onGenerateExcel,
@@ -52,6 +54,7 @@ export const EmployeeComponent: React.FunctionComponent<Props> = ({
       </TabPanelComponent>
       <TabPanelComponent value={tab} index={2}>
         <ReportComponent
+          report={report}
           className={classes.root}
           onGenerateExcel={onGenerateExcel}
           onCancel={onCancel}
