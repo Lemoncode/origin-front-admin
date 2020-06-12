@@ -7,10 +7,10 @@ export const validationSchema: ValidationSchema = {
     name: [Validators.required],
     email: [
       {
-        validator: Validators.email,
+        validator: Validators.required,
       },
       {
-        validator: Validators.required,
+        validator: Validators.email,
       },
     ],
     temporalPassword: [
