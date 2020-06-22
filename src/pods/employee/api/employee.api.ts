@@ -11,6 +11,9 @@ export const getEmployeeById = async (id: string): Promise<Employee> => {
       employee(id: "${id}") {
         id
         name
+        isActive
+        email
+        lastDateIncurred
       }
     }
   `;

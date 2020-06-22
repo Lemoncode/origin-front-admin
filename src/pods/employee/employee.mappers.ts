@@ -23,3 +23,9 @@ export const mapEmployeeFromApiToVm = (
       }
     : viewModel.createEmptyEmployee();
 };
+
+export const mapEmployeeFromVmToApi = (
+  employee: viewModel.Employee
+): apiModel.Employee => ({
+  ...employee,
+});

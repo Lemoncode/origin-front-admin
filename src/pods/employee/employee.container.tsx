@@ -9,7 +9,10 @@ import {
 import { useSnackbarContext } from 'common/components';
 import { trackPromise } from 'react-promise-tracker';
 import { getEmployeeById, saveEmployee } from './api';
-import { mapEmployeeFromApiToVm } from './employee.mappers';
+import {
+  mapEmployeeFromApiToVm,
+  mapEmployeeFromVmToApi,
+} from './employee.mappers';
 import { useParams } from 'react-router-dom';
 import { isEditModeHelper } from 'common/helpers';
 
@@ -35,8 +38,7 @@ export const EmployeeContainer: React.FunctionComponent = () => {
 
   const handleSave = async (employee: Employee) => {
     try {
-      // TODO: implement mapper
-      const apiEmployee: any = { id: employee.id, name: employee.name };
+      const apiEmployee = mapEmployeeFromVmToApi(employee);
       const id = await saveEmployee(apiEmployee);
       setEmployee({ ...employee, id });
     } catch (error) {

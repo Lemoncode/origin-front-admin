@@ -11,6 +11,9 @@ export const getEmployeeList = async (): Promise<Employee[]> => {
       employees {
         id
         name
+        isActive
+        email
+        lastDateIncurred
       }
     }
   `;
