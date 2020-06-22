@@ -8,7 +8,7 @@ import {
 } from './employee.vm';
 import { useSnackbarContext } from 'common/components';
 import { trackPromise } from 'react-promise-tracker';
-import { getEmployeeById } from './api';
+import { getEmployeeById, saveEmployee } from './api';
 import { mapEmployeeFromApiToVm } from './employee.mappers';
 import { useParams } from 'react-router-dom';
 import { isEditModeHelper } from 'common/helpers';
@@ -33,8 +33,16 @@ export const EmployeeContainer: React.FunctionComponent = () => {
     }
   };
 
-  const handleSave = (employee: Employee) => {
-    console.log('Guardado');
+  const handleSave = async (employee: Employee) => {
+    try {
+      // TODO: implement mapper
+      const apiEmployee: any = { id: employee.id, name: employee.name };
+      const id = await saveEmployee(apiEmployee);
+      setEmployee({ ...employee, id });
+    } catch (error) {
+      error &&
+        showMessage('Ha ocurrido un error al guardar el empleado', 'error');
+    }
   };
 
   const handleCancel = () => {
