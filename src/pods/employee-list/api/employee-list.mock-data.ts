@@ -1,5 +1,6 @@
 import { Employee } from './employee-list.api-model';
 
+// TODO: Move to back
 export const mockEmployeeList: Employee[] = [
   {
     id: '1',

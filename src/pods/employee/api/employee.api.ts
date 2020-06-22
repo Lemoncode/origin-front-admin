@@ -1,6 +1,21 @@
 import { Employee } from './employee.api-model';
-import { mockEmployee } from './employee.mock-data';
+import { graphQLClient } from 'core/api';
+
+interface GetEmployeeResponse {
+  employee: Employee;
+}
 
 export const getEmployeeById = async (id: string): Promise<Employee> => {
-  return mockEmployee;
+  const query = `
+    query {
+      employee(id: "${id}") {
+        id
+        name
+      }
+    }
+  `;
+
+  const { employee } = await graphQLClient.request<GetEmployeeResponse>(query);
+
+  return employee;
 };

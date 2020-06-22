@@ -1,5 +1,6 @@
 import { Employee, ProjectSummary } from './employee.api-model';
 
+// TODO: Move to back
 const mockProjectSummaryList: ProjectSummary[] = [
   {
     id: '1',
