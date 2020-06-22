@@ -1,10 +1,26 @@
+import { graphQLClient } from 'core/api';
 import { Employee } from './employee-list.api-model';
 import { mockEmployeeList } from './employee-list.mock-data';
 
 let employeeList = [...mockEmployeeList];
 
+interface GetEmployeeListResponse {
+  employees: Employee[];
+}
+
 export const getEmployeeList = async (): Promise<Employee[]> => {
-  return employeeList;
+  const query = `
+    query {
+      employees {
+        id
+        name
+      }
+    }
+  `;
+  const { employees } = await graphQLClient.request<GetEmployeeListResponse>(
+    query
+  );
+  return employees;
 };
 
 export const deleteEmployee = async (id: string): Promise<boolean> => {
