@@ -9,10 +9,11 @@ import {
 } from './employee.vm';
 import { useSnackbarContext } from 'common/components';
 import { trackPromise } from 'react-promise-tracker';
-import { getEmployeeById, saveEmployee } from './api';
+import { getEmployeeById, saveEmployee, saveProjectSummary } from './api';
 import {
   mapEmployeeFromApiToVm,
   mapEmployeeFromVmToApi,
+  mapProjectSummaryListFromVmToApi,
 } from './employee.mappers';
 import { useParams } from 'react-router-dom';
 import { isEditModeHelper } from 'common/helpers';
@@ -54,12 +55,22 @@ export const EmployeeContainer: React.FunctionComponent = () => {
   };
 
   const handleSaveProjectSelection = async (
-    employeeProjects: ProjectSummary[]
+    employeeSummary: ProjectSummary[]
   ) => {
-    try {
-      console.log(employeeProjects);
-    } catch (error) {
-      error && showMessage('Ha ocurrido un error al guardar', 'error');
+    if (id) {
+      try {
+        const apiProjectSummary = mapProjectSummaryListFromVmToApi(
+          employeeSummary
+        );
+        await saveProjectSummary(id, apiProjectSummary);
+        setEmployee({
+          ...employee,
+          projects: employeeSummary,
+        });
+        showMessage('Se actualizó con éxito', 'success');
+      } catch (error) {
+        error && showMessage('Ha ocurrido un error al guardar', 'error');
+      }
     }
   };
 

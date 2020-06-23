@@ -1,4 +1,4 @@
-import { Employee } from './employee.api-model';
+import { Employee, ProjectSummary } from './employee.api-model';
 import { graphQLClient } from 'core/api';
 
 interface GetEmployeeResponse {
@@ -49,4 +49,20 @@ export const saveEmployee = async (employee: Employee): Promise<string> => {
   );
 
   return saveEmployee.id;
+};
+
+export const saveProjectSummary = async (
+  id: string,
+  projectSummaryList: ProjectSummary[]
+): Promise<void> => {
+  const query = `mutation($projectSummaryList: [ProjectSummaryInput!]!) {
+    saveProjectSummaryList(
+      id: "${id}",
+      projectSummaryList: $projectSummaryList,
+    ) {
+      id
+    }
+  }`;
+
+  await graphQLClient.request(query, { projectSummaryList });
 };
