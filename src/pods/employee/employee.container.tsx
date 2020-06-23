@@ -5,6 +5,7 @@ import {
   Report,
   createEmptyEmployee,
   createEmptyReport,
+  ProjectSummary,
 } from './employee.vm';
 import { useSnackbarContext } from 'common/components';
 import { trackPromise } from 'react-promise-tracker';
@@ -15,6 +16,8 @@ import {
 } from './employee.mappers';
 import { useParams } from 'react-router-dom';
 import { isEditModeHelper } from 'common/helpers';
+import { routes } from 'core/router';
+import { useHistory } from 'react-router';
 
 export const EmployeeContainer: React.FunctionComponent = () => {
   const { id } = useParams();
@@ -24,6 +27,7 @@ export const EmployeeContainer: React.FunctionComponent = () => {
   const [isEditMode, setIsEditMode] = React.useState<boolean>(false);
   const [report, setReport] = React.useState<Report>(createEmptyReport());
   const { showMessage } = useSnackbarContext();
+  const history = useHistory();
 
   const onLoadEmployee = async () => {
     try {
@@ -36,19 +40,31 @@ export const EmployeeContainer: React.FunctionComponent = () => {
     }
   };
 
-  const handleSave = async (employee: Employee) => {
+  const handleSaveEmployee = async (employee: Employee) => {
     try {
       const apiEmployee = mapEmployeeFromVmToApi(employee);
       const id = await saveEmployee(apiEmployee);
       setEmployee({ ...employee, id });
+      showMessage('Empleado guardado con éxito', 'success');
+      history.push(routes.editEmployee(id));
     } catch (error) {
       error &&
         showMessage('Ha ocurrido un error al guardar el empleado', 'error');
     }
   };
 
+  const handleSaveProjectSelection = async (
+    employeeProjects: ProjectSummary[]
+  ) => {
+    try {
+      console.log(employeeProjects);
+    } catch (error) {
+      error && showMessage('Ha ocurrido un error al guardar', 'error');
+    }
+  };
+
   const handleCancel = () => {
-    history.back();
+    history.goBack();
   };
 
   const handleGenerateExcel = (report: Report) => {
@@ -69,7 +85,8 @@ export const EmployeeContainer: React.FunctionComponent = () => {
       employee={employee}
       isEditMode={isEditMode}
       report={report}
-      onSave={handleSave}
+      onSaveEmployee={handleSaveEmployee}
+      onSaveProjectSelection={handleSaveProjectSelection}
       onCancel={handleCancel}
       onGenerateExcel={handleGenerateExcel}
     />

@@ -14,6 +14,11 @@ export const getEmployeeById = async (id: string): Promise<Employee> => {
         isActive
         email
         lastDateIncurred
+        projects {
+          id
+          isAssigned
+          projectName
+        }
       }
     }
   `;

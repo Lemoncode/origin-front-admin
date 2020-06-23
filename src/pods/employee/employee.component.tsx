@@ -6,14 +6,15 @@ import {
 } from 'common/components';
 import AppBar from '@material-ui/core/AppBar';
 import { DataComponent, ProjectComponent, ReportComponent } from './components';
-import { Employee, Report } from './employee.vm';
+import { Employee, Report, ProjectSummary } from './employee.vm';
 import * as classes from './employee.styles';
 
 interface Props {
   employee: Employee;
   isEditMode: boolean;
   report: Report;
-  onSave: (employee: Employee) => void;
+  onSaveEmployee: (employee: Employee) => void;
+  onSaveProjectSelection: (project: ProjectSummary[]) => void;
   onCancel: () => void;
   onGenerateExcel: (report: Report) => void;
 }
@@ -22,7 +23,8 @@ export const EmployeeComponent: React.FunctionComponent<Props> = ({
   employee,
   isEditMode,
   report,
-  onSave,
+  onSaveEmployee,
+  onSaveProjectSelection,
   onCancel,
   onGenerateExcel,
 }) => {
@@ -40,7 +42,7 @@ export const EmployeeComponent: React.FunctionComponent<Props> = ({
         <DataComponent
           employee={employee}
           className={classes.root}
-          onSave={onSave}
+          onSave={onSaveEmployee}
           isEditMode={isEditMode}
           onCancel={onCancel}
         />
@@ -49,6 +51,7 @@ export const EmployeeComponent: React.FunctionComponent<Props> = ({
         <ProjectComponent
           projectSummaryList={employee.projects}
           className={classes.root}
+          onSave={onSaveProjectSelection}
           onCancel={onCancel}
         />
       </TabPanelComponent>
