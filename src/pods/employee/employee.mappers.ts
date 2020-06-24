@@ -3,14 +3,14 @@ import * as apiModel from './api/employee.api-model';
 import * as viewModel from './employee.vm';
 
 const mapProjectSummaryFromApiToVm = (
-  projectSummary: apiModel.ProjectSummary
-): viewModel.ProjectSummary => ({
+  projectSummary: apiModel.EmployeeProject
+): viewModel.EmployeeProject => ({
   ...projectSummary,
 });
 
 const mapProjectSummaryListFromApiToVm = (
-  projectSummary: apiModel.ProjectSummary[]
-): viewModel.ProjectSummary[] =>
+  projectSummary: apiModel.EmployeeProject[]
+): viewModel.EmployeeProject[] =>
   mapToCollection(projectSummary, ps => mapProjectSummaryFromApiToVm(ps));
 
 export const mapEmployeeFromApiToVm = (
@@ -31,14 +31,13 @@ export const mapEmployeeFromVmToApi = (
 });
 
 const mapProjectSummaryFromVmToApi = (
-  projectSummary: viewModel.ProjectSummary
-): apiModel.ProjectSummary => ({
+  projectSummary: viewModel.EmployeeProject
+): apiModel.EmployeeProject => ({
   id: projectSummary.id,
   isAssigned: projectSummary.isAssigned,
-  projectName: projectSummary.projectName,
 });
 
 export const mapProjectSummaryListFromVmToApi = (
-  projectSummary: viewModel.ProjectSummary[]
-): apiModel.ProjectSummary[] =>
+  projectSummary: viewModel.EmployeeProject[]
+): apiModel.EmployeeProject[] =>
   mapToCollection(projectSummary, mapProjectSummaryFromVmToApi);

@@ -6,7 +6,7 @@ import {
 } from 'common/components';
 import AppBar from '@material-ui/core/AppBar';
 import { DataComponent, ProjectComponent, ReportComponent } from './components';
-import { Employee, Report, ProjectSummary } from './employee.vm';
+import { Employee, Report, EmployeeProject } from './employee.vm';
 import * as classes from './employee.styles';
 
 interface Props {
@@ -14,7 +14,7 @@ interface Props {
   isEditMode: boolean;
   report: Report;
   onSaveEmployee: (employee: Employee) => void;
-  onSaveProjectSelection: (project: ProjectSummary[]) => void;
+  onSaveProjectSelection: (project: EmployeeProject[]) => void;
   onCancel: () => void;
   onGenerateExcel: (report: Report) => void;
 }

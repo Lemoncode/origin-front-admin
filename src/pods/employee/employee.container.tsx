@@ -5,7 +5,7 @@ import {
   Report,
   createEmptyEmployee,
   createEmptyReport,
-  ProjectSummary,
+  EmployeeProject,
 } from './employee.vm';
 import { useSnackbarContext } from 'common/components';
 import { trackPromise } from 'react-promise-tracker';
@@ -62,7 +62,7 @@ export const EmployeeContainer: React.FunctionComponent = () => {
   };
 
   const handleSaveProjectSelection = async (
-    employeeSummary: ProjectSummary[]
+    employeeSummary: EmployeeProject[]
   ) => {
     if (params.id) {
       try {
