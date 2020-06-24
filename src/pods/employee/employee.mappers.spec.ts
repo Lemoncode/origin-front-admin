@@ -6,9 +6,10 @@ describe('./pods/employee/employee.mappers', () => {
   it('should return empty employee when feeding null value', () => {
     // Arrange
     const employee = null;
+    const projects = null;
 
     // Act
-    const result = mapEmployeeFromApiToVm(employee);
+    const result = mapEmployeeFromApiToVm(employee, projects);
 
     // Assert
     expect(result).toEqual(viewModel.createEmptyEmployee());
@@ -17,9 +18,10 @@ describe('./pods/employee/employee.mappers', () => {
   it('should return empty employee when feeding undefined value', () => {
     // Arrange
     const employee = undefined;
+    const projects = undefined;
 
     // Act
-    const result = mapEmployeeFromApiToVm(employee);
+    const result = mapEmployeeFromApiToVm(employee, projects);
 
     // Assert
     expect(result).toEqual(viewModel.createEmptyEmployee());
@@ -36,17 +38,39 @@ describe('./pods/employee/employee.mappers', () => {
       projects: null,
     };
 
+    const projects: apiModel.Project[] = [
+      {
+        id: '1',
+        name: 'project test 1',
+      },
+      {
+        id: '2',
+        name: 'project test 2',
+      },
+    ];
+
     const expectedResult: viewModel.Employee = {
       id: 'test id',
       name: 'test name',
       email: 'test@email.com',
       isActive: true,
       temporalPassword: 'test password',
-      projects: [],
+      projects: [
+        {
+          id: '1',
+          name: 'project test 1',
+          isAssigned: false,
+        },
+        {
+          id: '2',
+          name: 'project test 2',
+          isAssigned: false,
+        },
+      ],
     };
 
     // Act
-    const result = mapEmployeeFromApiToVm(employee);
+    const result = mapEmployeeFromApiToVm(employee, projects);
 
     // Assert
     expect(result).toEqual(expectedResult);
@@ -69,11 +93,33 @@ describe('./pods/employee/employee.mappers', () => {
       email: 'test@email.com',
       isActive: true,
       temporalPassword: 'test password',
-      projects: [],
+      projects: [
+        {
+          id: '1',
+          name: 'project test 1',
+          isAssigned: false,
+        },
+        {
+          id: '2',
+          name: 'project test 2',
+          isAssigned: false,
+        },
+      ],
     };
 
+    const projects: apiModel.Project[] = [
+      {
+        id: '1',
+        name: 'project test 1',
+      },
+      {
+        id: '2',
+        name: 'project test 2',
+      },
+    ];
+
     // Act
-    const result = mapEmployeeFromApiToVm(employee);
+    const result = mapEmployeeFromApiToVm(employee, projects);
 
     // Assert
     expect(result).toEqual(expectedResult);
@@ -89,11 +135,26 @@ describe('./pods/employee/employee.mappers', () => {
       temporalPassword: 'test password',
       projects: [
         {
-          id: 'test id',
+          id: '1',
           isAssigned: true,
+        },
+        {
+          id: '2',
+          isAssigned: false,
         },
       ],
     };
+
+    const projects: apiModel.Project[] = [
+      {
+        id: '1',
+        name: 'project test 1',
+      },
+      {
+        id: '2',
+        name: 'project test 2',
+      },
+    ];
 
     const expectedResult: viewModel.Employee = {
       id: 'test id',
@@ -103,14 +164,20 @@ describe('./pods/employee/employee.mappers', () => {
       temporalPassword: 'test password',
       projects: [
         {
-          id: 'test id',
+          id: '1',
           isAssigned: true,
+          name: 'project test 1',
+        },
+        {
+          id: '2',
+          isAssigned: false,
+          name: 'project test 2',
         },
       ],
     };
 
     // Act
-    const result = mapEmployeeFromApiToVm(employee);
+    const result = mapEmployeeFromApiToVm(employee, projects);
 
     // Assert
     expect(result).toEqual(expectedResult);
