@@ -3,19 +3,24 @@ import * as apiModel from './api/employee.api-model';
 import * as viewModel from './employee.vm';
 
 const mapProjectSummaryFromApiToVm = (
-  projectSummary: apiModel.EmployeeProject,
-  projects: apiModel.Project[]
-): viewModel.EmployeeProject => ({
-  ...projectSummary,
-  name: projects.find(p => p.id === projectSummary.id).name,
-});
+  project: apiModel.Project,
+  employeeProjectList: apiModel.EmployeeProject[]
+): viewModel.EmployeeProject => {
+  const employeeProject = employeeProjectList
+    ? employeeProjectList.find(ep => ep.id === project.id)
+    : viewModel.createEmptyEmployeeProject();
+  return {
+    ...project,
+    isAssigned: employeeProject?.isAssigned,
+  };
+};
 
 const mapProjectSummaryListFromApiToVm = (
-  projectSummary: apiModel.EmployeeProject[],
-  projects: apiModel.Project[]
+  project: apiModel.Project[],
+  employeeProject: apiModel.EmployeeProject[]
 ): viewModel.EmployeeProject[] =>
-  mapToCollection(projectSummary, ps =>
-    mapProjectSummaryFromApiToVm(ps, projects)
+  mapToCollection(project, p =>
+    mapProjectSummaryFromApiToVm(p, employeeProject)
   );
 
 export const mapEmployeeFromApiToVm = (
@@ -25,7 +30,7 @@ export const mapEmployeeFromApiToVm = (
   return Boolean(employee)
     ? {
         ...employee,
-        projects: mapProjectSummaryListFromApiToVm(employee.projects, projects),
+        projects: mapProjectSummaryListFromApiToVm(projects, employee.projects),
       }
     : viewModel.createEmptyEmployee();
 };

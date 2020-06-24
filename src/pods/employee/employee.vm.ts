@@ -37,3 +37,9 @@ export const createEmptyReport = (): Report => ({
   month: '',
   year: '',
 });
+
+export const createEmptyEmployeeProject = (): EmployeeProject => ({
+  id: '',
+  name: '',
+  isAssigned: false,
+});
