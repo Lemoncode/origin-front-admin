@@ -10,6 +10,7 @@ export interface Employee {
 export interface EmployeeProject {
   id: string;
   isAssigned?: boolean;
+  name: string;
 }
 
 export interface Project {

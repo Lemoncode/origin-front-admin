@@ -40,7 +40,10 @@ export const EmployeeContainer: React.FunctionComponent = () => {
       const [apiProjects, apiEmployee] = await trackPromise(
         Promise.all([getProjects(), getEmployeeById(params.id)])
       );
-      const viewModelEmployee = mapEmployeeFromApiToVm(apiEmployee);
+      const viewModelEmployee = mapEmployeeFromApiToVm(
+        apiEmployee,
+        apiProjects
+      );
       setEmployee(viewModelEmployee);
     } catch (error) {
       error &&

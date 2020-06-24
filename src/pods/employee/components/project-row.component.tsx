@@ -29,7 +29,7 @@ export const EmployeeRowComponent: React.FunctionComponent<RowProps> = ({
           checked={row.isAssigned}
         />
       </CellComponent>
-      <CellComponent>{''}</CellComponent>
+      <CellComponent>{row.name}</CellComponent>
     </RowComponent>
   );
 };

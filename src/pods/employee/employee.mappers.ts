@@ -3,23 +3,29 @@ import * as apiModel from './api/employee.api-model';
 import * as viewModel from './employee.vm';
 
 const mapProjectSummaryFromApiToVm = (
-  projectSummary: apiModel.EmployeeProject
+  projectSummary: apiModel.EmployeeProject,
+  projects: apiModel.Project[]
 ): viewModel.EmployeeProject => ({
   ...projectSummary,
+  name: projects.find(p => p.id === projectSummary.id).name,
 });
 
 const mapProjectSummaryListFromApiToVm = (
-  projectSummary: apiModel.EmployeeProject[]
+  projectSummary: apiModel.EmployeeProject[],
+  projects: apiModel.Project[]
 ): viewModel.EmployeeProject[] =>
-  mapToCollection(projectSummary, ps => mapProjectSummaryFromApiToVm(ps));
+  mapToCollection(projectSummary, ps =>
+    mapProjectSummaryFromApiToVm(ps, projects)
+  );
 
 export const mapEmployeeFromApiToVm = (
-  employee: apiModel.Employee
+  employee: apiModel.Employee,
+  projects: apiModel.Project[]
 ): viewModel.Employee => {
   return Boolean(employee)
     ? {
         ...employee,
-        projects: mapProjectSummaryListFromApiToVm(employee.projects),
+        projects: mapProjectSummaryListFromApiToVm(employee.projects, projects),
       }
     : viewModel.createEmptyEmployee();
 };
@@ -27,12 +33,19 @@ export const mapEmployeeFromApiToVm = (
 export const mapEmployeeFromVmToApi = (
   employee: viewModel.Employee
 ): apiModel.Employee => ({
-  ...employee,
+  id: employee.id,
+  name: employee.name,
+  email: employee.email,
+  isActive: employee.isActive,
+  temporalPassword: employee.temporalPassword,
 });
 
 const mapEmployeeProjectFromVmToApi = (
   employeeProject: viewModel.EmployeeProject
-): apiModel.EmployeeProject => ({ ...employeeProject });
+): apiModel.EmployeeProject => ({
+  id: employeeProject.id,
+  isAssigned: employeeProject.isAssigned,
+});
 
 export const mapEmployeeProjectListFromVmToApi = (
   employeeProjectList: viewModel.EmployeeProject[]
