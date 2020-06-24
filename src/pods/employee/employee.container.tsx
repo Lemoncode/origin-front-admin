@@ -17,11 +17,11 @@ import {
 } from './employee.mappers';
 import { useParams } from 'react-router-dom';
 import { isEditModeHelper } from 'common/helpers';
-import { routes } from 'core/router';
+import { routes, EditParams } from 'core/router';
 import { useHistory } from 'react-router';
 
 export const EmployeeContainer: React.FunctionComponent = () => {
-  const { id } = useParams();
+  const params = useParams<EditParams>();
   const [employee, setEmployee] = React.useState<Employee>(
     createEmptyEmployee()
   );
@@ -32,7 +32,7 @@ export const EmployeeContainer: React.FunctionComponent = () => {
 
   const onLoadEmployee = async () => {
     try {
-      const apiEmployee = await trackPromise(getEmployeeById(id));
+      const apiEmployee = await trackPromise(getEmployeeById(params.id));
       const viewModelEmployee = mapEmployeeFromApiToVm(apiEmployee);
       setEmployee(viewModelEmployee);
     } catch (error) {
@@ -41,28 +41,35 @@ export const EmployeeContainer: React.FunctionComponent = () => {
     }
   };
 
+  const handleSuccessSaveEmployee = (id: string, newEmployee: Employee) => {
+    if (id) {
+      showMessage('Empleado guardado con éxito', 'success');
+      setEmployee(newEmployee);
+      history.push(routes.editEmployee(id));
+    } else {
+      showMessage('Ha ocurrido un error al guardar el empleado', 'error');
+    }
+  };
+
   const handleSaveEmployee = async (employee: Employee) => {
     try {
       const apiEmployee = mapEmployeeFromVmToApi(employee);
-      const id = await saveEmployee(apiEmployee);
-      setEmployee({ ...employee, id });
-      showMessage('Empleado guardado con éxito', 'success');
-      history.push(routes.editEmployee(id));
+      const id = await trackPromise(saveEmployee(apiEmployee));
+      handleSuccessSaveEmployee(id, employee);
     } catch (error) {
-      error &&
-        showMessage('Ha ocurrido un error al guardar el empleado', 'error');
+      error && showMessage(error.message, 'error');
     }
   };
 
   const handleSaveProjectSelection = async (
     employeeSummary: ProjectSummary[]
   ) => {
-    if (id) {
+    if (params.id) {
       try {
         const apiProjectSummary = mapProjectSummaryListFromVmToApi(
           employeeSummary
         );
-        await saveProjectSummary(id, apiProjectSummary);
+        await trackPromise(saveProjectSummary(params.id, apiProjectSummary));
         setEmployee({
           ...employee,
           projects: employeeSummary,
@@ -84,7 +91,7 @@ export const EmployeeContainer: React.FunctionComponent = () => {
   };
 
   React.useEffect(() => {
-    const isEditMode = isEditModeHelper(id);
+    const isEditMode = isEditModeHelper(params.id);
     setIsEditMode(isEditMode);
     if (isEditMode) {
       onLoadEmployee();
