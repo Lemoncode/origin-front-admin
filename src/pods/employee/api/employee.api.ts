@@ -33,10 +33,12 @@ interface GetProjectListResponse {
 
 export const getProjects = async (): Promise<Project[]> => {
   const query = `
+    query {
       projects {
         id
         name
       }
+    }
     `;
   const { projects } = await graphQLClient.request<GetProjectListResponse>(
     query
