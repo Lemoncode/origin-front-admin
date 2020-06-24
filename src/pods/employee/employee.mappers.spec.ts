@@ -90,7 +90,6 @@ describe('./pods/employee/employee.mappers', () => {
       projects: [
         {
           id: 'test id',
-          projectName: 'test employee name',
           isAssigned: true,
         },
       ],
@@ -105,7 +104,6 @@ describe('./pods/employee/employee.mappers', () => {
       projects: [
         {
           id: 'test id',
-          projectName: 'test employee name',
           isAssigned: true,
         },
       ],

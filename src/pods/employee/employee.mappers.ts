@@ -30,14 +30,11 @@ export const mapEmployeeFromVmToApi = (
   ...employee,
 });
 
-const mapProjectSummaryFromVmToApi = (
-  projectSummary: viewModel.EmployeeProject
-): apiModel.EmployeeProject => ({
-  id: projectSummary.id,
-  isAssigned: projectSummary.isAssigned,
-});
+const mapEmployeeProjectFromVmToApi = (
+  employeeProject: viewModel.EmployeeProject
+): apiModel.EmployeeProject => ({ ...employeeProject });
 
-export const mapProjectSummaryListFromVmToApi = (
-  projectSummary: viewModel.EmployeeProject[]
+export const mapEmployeeProjectListFromVmToApi = (
+  employeeProjectList: viewModel.EmployeeProject[]
 ): apiModel.EmployeeProject[] =>
-  mapToCollection(projectSummary, mapProjectSummaryFromVmToApi);
+  mapToCollection(employeeProjectList, mapEmployeeProjectFromVmToApi);

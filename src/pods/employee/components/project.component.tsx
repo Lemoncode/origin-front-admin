@@ -5,25 +5,25 @@ import { EmployeeRowComponent } from './project-row.component';
 import { CommandFooterComponent } from 'common-app/command-footer';
 
 interface Props {
-  projectSummaryList: EmployeeProject[];
-  className?: string;
+  employeeProjectList: EmployeeProject[];
   onSave: (project: EmployeeProject[]) => void;
   onCancel: () => void;
+  className?: string;
 }
 
 export const ProjectComponent: React.FunctionComponent<Props> = ({
-  projectSummaryList,
-  className,
+  employeeProjectList,
   onSave,
   onCancel,
+  className,
 }) => {
   const [projectList, setProjectList] = React.useState<EmployeeProject[]>(
-    projectSummaryList
+    employeeProjectList
   );
 
   React.useEffect(() => {
-    setProjectList(projectSummaryList);
-  }, [projectSummaryList]);
+    setProjectList(employeeProjectList);
+  }, [employeeProjectList]);
 
   const handleChangeProject = (id: string) => (project: EmployeeProject) => {
     const updateProjectList = projectList.map(p => (p.id === id ? project : p));

@@ -49,7 +49,7 @@ export const EmployeeComponent: React.FunctionComponent<Props> = ({
       </TabPanelComponent>
       <TabPanelComponent value={tab} index={1}>
         <ProjectComponent
-          projectSummaryList={employee.projects}
+          employeeProjectList={employee.projects}
           className={classes.root}
           onSave={onSaveProjectSelection}
           onCancel={onCancel}

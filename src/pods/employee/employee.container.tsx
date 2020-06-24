@@ -9,11 +9,16 @@ import {
 } from './employee.vm';
 import { useSnackbarContext } from 'common/components';
 import { trackPromise } from 'react-promise-tracker';
-import { getEmployeeById, saveEmployee, saveProjectSummary } from './api';
+import {
+  getEmployeeById,
+  saveEmployee,
+  saveEmployeeProjectList,
+  getProjects,
+} from './api';
 import {
   mapEmployeeFromApiToVm,
   mapEmployeeFromVmToApi,
-  mapProjectSummaryListFromVmToApi,
+  mapEmployeeProjectListFromVmToApi,
 } from './employee.mappers';
 import { useParams } from 'react-router-dom';
 import { isEditModeHelper } from 'common/helpers';
@@ -32,7 +37,9 @@ export const EmployeeContainer: React.FunctionComponent = () => {
 
   const onLoadEmployee = async () => {
     try {
-      const apiEmployee = await trackPromise(getEmployeeById(params.id));
+      const [apiProjects, apiEmployee] = await trackPromise(
+        Promise.all([getProjects(), getEmployeeById(params.id)])
+      );
       const viewModelEmployee = mapEmployeeFromApiToVm(apiEmployee);
       setEmployee(viewModelEmployee);
     } catch (error) {
@@ -66,10 +73,12 @@ export const EmployeeContainer: React.FunctionComponent = () => {
   ) => {
     if (params.id) {
       try {
-        const apiProjectSummary = mapProjectSummaryListFromVmToApi(
+        const apiProjectSummary = mapEmployeeProjectListFromVmToApi(
           employeeSummary
         );
-        await trackPromise(saveProjectSummary(params.id, apiProjectSummary));
+        await trackPromise(
+          saveEmployeeProjectList(params.id, apiProjectSummary)
+        );
         setEmployee({
           ...employee,
           projects: employeeSummary,
