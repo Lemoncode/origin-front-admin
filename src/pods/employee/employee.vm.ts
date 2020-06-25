@@ -13,12 +13,6 @@ export interface EmployeeProject {
   name: string;
 }
 
-export interface Project {
-  id: string;
-  isAssigned?: boolean;
-  name: string;
-}
-
 export interface Report {
   month: string;
   year: string;
