@@ -1,11 +1,11 @@
 import React from 'react';
 import { TableContainer, RowRendererProps } from 'common/components';
-import { EmployeeSummary } from '../project.vm';
+import { ProjectEmployee } from '../project.vm';
 import { CommandFooterComponent } from 'common-app/command-footer';
 import { ProjectRowComponent } from './employee-row.component';
 
 interface Props {
-  employeeSummaryList: EmployeeSummary[];
+  employeeSummaryList: ProjectEmployee[];
   onCancel: () => void;
   className: string;
 }
@@ -21,7 +21,7 @@ export const EmployeeComponent: React.FunctionComponent<Props> = ({
         columns={['Asignado', 'Empleado']}
         rows={employeeSummaryList}
         className={className}
-        rowRenderer={(rowProps: RowRendererProps<EmployeeSummary>) => (
+        rowRenderer={(rowProps: RowRendererProps<ProjectEmployee>) => (
           <ProjectRowComponent {...rowProps} />
         )}
       />

@@ -1,13 +1,41 @@
+import { graphQLClient } from 'core/api';
 import { Project } from './project-list.api-model';
-import { mockProjectList } from './project-list.mock-data';
 
-let projectList = [...mockProjectList];
+interface GetProjectListReponse {
+  projects: Project[];
+}
 
 export const getProjectList = async (): Promise<Project[]> => {
-  return projectList;
+  const query = `
+    query {
+      projects {
+        id
+        isActive
+        code
+        name
+        lastDateIncurred
+        creationDate
+      }
+    }
+  `;
+  const { projects } = await graphQLClient.request<GetProjectListReponse>(
+    query
+  );
+  return projects;
 };
 
+interface DeleteProjectResponse {
+  deleteProject: boolean;
+}
+
 export const deleteProject = async (id: string): Promise<boolean> => {
-  projectList = projectList.filter(p => p.id !== id);
-  return true;
+  const query = `
+    mutation {
+      deleteProject(id: "${id}")
+    }
+  `;
+  const { deleteProject } = await graphQLClient.request<DeleteProjectResponse>(
+    query
+  );
+  return deleteProject;
 };

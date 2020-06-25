@@ -2,7 +2,7 @@ import React from 'react';
 import { ProjectComponent } from './project.component';
 import { useParams } from 'react-router-dom';
 import { useSnackbarContext } from 'common/components';
-import { getProjectById } from './api';
+import { getProjectById, getEmployees } from './api';
 import { trackPromise } from 'react-promise-tracker';
 import { mapProjectFromApiToVm } from './project.mapper';
 import {
@@ -22,8 +22,10 @@ export const ProjectContainer: React.FunctionComponent = () => {
 
   const onLoadProject = async () => {
     try {
-      const apiProject = await trackPromise(getProjectById(id));
-      const viewModelProject = mapProjectFromApiToVm(apiProject);
+      const [apiEmployees, apiProject] = await trackPromise(
+        Promise.all([getEmployees(), getProjectById(id)])
+      );
+      const viewModelProject = mapProjectFromApiToVm(apiProject, apiEmployees);
       setProject(viewModelProject);
     } catch (error) {
       error &&

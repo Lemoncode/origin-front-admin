@@ -1,16 +1,18 @@
+import { Employee } from 'pods/employee-list/employee-list.vm';
+
 export interface Project {
   id: string;
   name: string;
   externalId?: string;
   comments?: string;
   isActive: boolean;
-  employees: EmployeeSummary[];
+  employees: ProjectEmployee[];
 }
 
-export interface EmployeeSummary {
+export interface ProjectEmployee {
   id: string;
   isAssigned?: boolean;
-  employeeName: string;
+  name: string;
 }
 
 export interface Report {
@@ -30,4 +32,10 @@ export const createEmptyProject = (): Project => ({
 export const createEmptyReport = (): Report => ({
   month: '',
   year: '',
+});
+
+export const createEmptyProjectEmployee = (): ProjectEmployee => ({
+  id: '',
+  name: '',
+  isAssigned: false,
 });

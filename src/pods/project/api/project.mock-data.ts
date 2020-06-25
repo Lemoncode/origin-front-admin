@@ -1,24 +1,20 @@
-import { Project, EmployeeSummary } from './project.api-model';
+import { Project, ProjectEmployee } from './project.api-model';
 
-const mockEmployeeSummaryList: EmployeeSummary[] = [
+const mockEmployeeSummaryList: ProjectEmployee[] = [
   {
     id: '1',
-    employeeName: 'Daniel Perez',
     isAssigned: true,
   },
   {
     id: '2',
-    employeeName: 'Jose Sanchez',
     isAssigned: false,
   },
   {
     id: '3',
-    employeeName: 'Javier Benitez',
     isAssigned: false,
   },
   {
     id: '4',
-    employeeName: 'María Peña',
     isAssigned: true,
   },
 ];
