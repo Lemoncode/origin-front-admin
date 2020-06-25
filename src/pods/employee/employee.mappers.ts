@@ -37,13 +37,17 @@ export const mapEmployeeFromApiToVm = (
 
 export const mapEmployeeFromVmToApi = (
   employee: viewModel.Employee
-): apiModel.Employee => ({
-  id: employee.id,
-  name: employee.name,
-  email: employee.email,
-  isActive: employee.isActive,
-  temporalPassword: employee.temporalPassword,
-});
+): apiModel.Employee => {
+  return Boolean(employee)
+    ? {
+        id: employee.id,
+        name: employee.name,
+        email: employee.email,
+        isActive: employee.isActive,
+        temporalPassword: employee.temporalPassword,
+      }
+    : viewModel.createEmptyEmployee();
+};
 
 const mapEmployeeProjectFromVmToApi = (
   employeeProject: viewModel.EmployeeProject
