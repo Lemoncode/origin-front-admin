@@ -10,7 +10,7 @@ import {
   EmployeeComponent,
   ReportComponent,
 } from './components';
-import { Project } from './project.vm';
+import { Project, Report } from './project.vm';
 import * as classes from './project.styles';
 
 interface Props {
