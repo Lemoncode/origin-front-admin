@@ -1,31 +1,50 @@
 import React from 'react';
 import { TableContainer, RowRendererProps } from 'common/components';
-import { ProjectSummary } from '../employee.vm';
+import { EmployeeProject } from '../employee.vm';
 import { EmployeeRowComponent } from './project-row.component';
 import { CommandFooterComponent } from 'common-app/command-footer';
 
 interface Props {
-  projectSummaryList: ProjectSummary[];
-  className?: string;
+  employeeProjectList: EmployeeProject[];
+  onSave: (project: EmployeeProject[]) => void;
   onCancel: () => void;
+  className?: string;
 }
 
 export const ProjectComponent: React.FunctionComponent<Props> = ({
-  projectSummaryList,
-  className,
+  employeeProjectList,
+  onSave,
   onCancel,
+  className,
 }) => {
+  const [projectList, setProjectList] = React.useState<EmployeeProject[]>(
+    employeeProjectList
+  );
+
+  React.useEffect(() => {
+    setProjectList(employeeProjectList);
+  }, [employeeProjectList]);
+
+  const handleChangeProject = (id: string) => (project: EmployeeProject) => {
+    const updateProjectList = projectList.map(p => (p.id === id ? project : p));
+    setProjectList(updateProjectList);
+  };
+
+  const handleSave = () => onSave(projectList);
   return (
     <>
       <TableContainer
-        columns={['Asignado', 'Nombre y Apellido']}
-        rows={projectSummaryList}
+        columns={['Asignado', 'Nombre']}
+        rows={projectList}
         className={className}
-        rowRenderer={(rowProps: RowRendererProps<ProjectSummary>) => (
-          <EmployeeRowComponent {...rowProps} />
+        rowRenderer={(rowProps: RowRendererProps<EmployeeProject>) => (
+          <EmployeeRowComponent
+            {...rowProps}
+            onChangeProject={handleChangeProject(rowProps.row.id)}
+          />
         )}
       />
-      <CommandFooterComponent onCancel={onCancel} />
+      <CommandFooterComponent onSave={handleSave} onCancel={onCancel} />
     </>
   );
 };

@@ -5,27 +5,45 @@ import {
   Report,
   createEmptyEmployee,
   createEmptyReport,
+  EmployeeProject,
 } from './employee.vm';
 import { useSnackbarContext } from 'common/components';
 import { trackPromise } from 'react-promise-tracker';
-import { getEmployeeById } from './api';
-import { mapEmployeeFromApiToVm } from './employee.mappers';
+import {
+  getEmployeeById,
+  saveEmployee,
+  saveEmployeeProjectList,
+  getProjects,
+} from './api';
+import {
+  mapEmployeeFromApiToVm,
+  mapEmployeeFromVmToApi,
+  mapEmployeeProjectListFromVmToApi,
+} from './employee.mappers';
 import { useParams } from 'react-router-dom';
 import { isEditModeHelper } from 'common/helpers';
+import { routes, EditParams } from 'core/router';
+import { useHistory } from 'react-router';
 
 export const EmployeeContainer: React.FunctionComponent = () => {
-  const { id } = useParams();
+  const params = useParams<EditParams>();
   const [employee, setEmployee] = React.useState<Employee>(
     createEmptyEmployee()
   );
   const [isEditMode, setIsEditMode] = React.useState<boolean>(false);
   const [report, setReport] = React.useState<Report>(createEmptyReport());
   const { showMessage } = useSnackbarContext();
+  const history = useHistory();
 
   const onLoadEmployee = async () => {
     try {
-      const apiEmployee = await trackPromise(getEmployeeById(id));
-      const viewModelEmployee = mapEmployeeFromApiToVm(apiEmployee);
+      const [apiProjects, apiEmployee] = await trackPromise(
+        Promise.all([getProjects(), getEmployeeById(params.id)])
+      );
+      const viewModelEmployee = mapEmployeeFromApiToVm(
+        apiEmployee,
+        apiProjects
+      );
       setEmployee(viewModelEmployee);
     } catch (error) {
       error &&
@@ -33,12 +51,50 @@ export const EmployeeContainer: React.FunctionComponent = () => {
     }
   };
 
-  const handleSave = (employee: Employee) => {
-    console.log('Guardado');
+  const handleSuccessSaveEmployee = (id: string, newEmployee: Employee) => {
+    if (id) {
+      showMessage('Empleado guardado con éxito', 'success');
+      setEmployee(newEmployee);
+      history.push(routes.editEmployee(id));
+    } else {
+      showMessage('Ha ocurrido un error al guardar el empleado', 'error');
+    }
+  };
+
+  const handleSaveEmployee = async (employee: Employee) => {
+    try {
+      const apiEmployee = mapEmployeeFromVmToApi(employee);
+      const id = await trackPromise(saveEmployee(apiEmployee));
+      handleSuccessSaveEmployee(id, employee);
+    } catch (error) {
+      error && showMessage(error.message, 'error');
+    }
+  };
+
+  const handleSaveProjectSelection = async (
+    employeeSummary: EmployeeProject[]
+  ) => {
+    if (params.id) {
+      try {
+        const apiProjectSummary = mapEmployeeProjectListFromVmToApi(
+          employeeSummary
+        );
+        await trackPromise(
+          saveEmployeeProjectList(params.id, apiProjectSummary)
+        );
+        setEmployee({
+          ...employee,
+          projects: employeeSummary,
+        });
+        showMessage('Se actualizó con éxito', 'success');
+      } catch (error) {
+        error && showMessage('Ha ocurrido un error al guardar', 'error');
+      }
+    }
   };
 
   const handleCancel = () => {
-    history.back();
+    history.goBack();
   };
 
   const handleGenerateExcel = (report: Report) => {
@@ -47,7 +103,7 @@ export const EmployeeContainer: React.FunctionComponent = () => {
   };
 
   React.useEffect(() => {
-    const isEditMode = isEditModeHelper(id);
+    const isEditMode = isEditModeHelper(params.id);
     setIsEditMode(isEditMode);
     if (isEditMode) {
       onLoadEmployee();
@@ -59,7 +115,8 @@ export const EmployeeContainer: React.FunctionComponent = () => {
       employee={employee}
       isEditMode={isEditMode}
       report={report}
-      onSave={handleSave}
+      onSaveEmployee={handleSaveEmployee}
+      onSaveProjectSelection={handleSaveProjectSelection}
       onCancel={handleCancel}
       onGenerateExcel={handleGenerateExcel}
     />

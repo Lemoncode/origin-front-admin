@@ -28,6 +28,9 @@ module.exports = merge.strategy({
     port: 8080,
     stats: 'minimal',
     hot: true,
+    proxy: {
+      '/graphql': 'http://localhost:8081',
+    },
   },
   plugins: [
     new Dotenv({
