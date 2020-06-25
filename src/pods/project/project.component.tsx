@@ -10,7 +10,7 @@ import {
   EmployeeComponent,
   ReportComponent,
 } from './components';
-import { Project } from './project.vm';
+import { Project, Report } from './project.vm';
 import * as classes from './project.styles';
 
 interface Props {
@@ -50,7 +50,7 @@ export const ProjectComponent: React.FunctionComponent<Props> = ({
       </TabPanelComponent>
       <TabPanelComponent value={tab} index={1}>
         <EmployeeComponent
-          employeeSummaryList={project.employees}
+          projectEmployeeList={project.employees}
           onCancel={onCancel}
           className={classes.root}
         />

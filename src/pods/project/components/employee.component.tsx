@@ -5,13 +5,13 @@ import { CommandFooterComponent } from 'common-app/command-footer';
 import { ProjectRowComponent } from './employee-row.component';
 
 interface Props {
-  employeeSummaryList: ProjectEmployee[];
+  projectEmployeeList: ProjectEmployee[];
   onCancel: () => void;
   className: string;
 }
 
 export const EmployeeComponent: React.FunctionComponent<Props> = ({
-  employeeSummaryList,
+  projectEmployeeList,
   onCancel,
   className,
 }) => {
@@ -19,7 +19,7 @@ export const EmployeeComponent: React.FunctionComponent<Props> = ({
     <>
       <TableContainer
         columns={['Asignado', 'Empleado']}
-        rows={employeeSummaryList}
+        rows={projectEmployeeList}
         className={className}
         rowRenderer={(rowProps: RowRendererProps<ProjectEmployee>) => (
           <ProjectRowComponent {...rowProps} />
