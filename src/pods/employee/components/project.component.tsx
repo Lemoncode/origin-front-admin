@@ -34,7 +34,7 @@ export const ProjectComponent: React.FunctionComponent<Props> = ({
   return (
     <>
       <TableContainer
-        columns={['Asignado', 'Nombre y Apellido']}
+        columns={['Asignado', 'Nombre']}
         rows={projectList}
         className={className}
         rowRenderer={(rowProps: RowRendererProps<EmployeeProject>) => (
