@@ -33,7 +33,7 @@ export const ProjectContainer: React.FunctionComponent = () => {
     }
   };
 
-  const handleSave = (Project: Project) => {
+  const handleSave = (project: Project) => {
     console.log('Guardado');
   };
 
