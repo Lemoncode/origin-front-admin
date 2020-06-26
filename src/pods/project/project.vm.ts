@@ -1,8 +1,8 @@
 export interface Project {
   id: string;
   name: string;
-  externalId: string;
-  comments: string;
+  externalId?: string;
+  comments?: string;
   isActive: boolean;
   employees: ProjectEmployee[];
 }

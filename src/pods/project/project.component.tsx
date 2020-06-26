@@ -10,7 +10,7 @@ import {
   EmployeeComponent,
   ReportComponent,
 } from './components';
-import { Project, Report } from './project.vm';
+import { Project, Report, ProjectEmployee } from './project.vm';
 import * as classes from './project.styles';
 
 interface Props {
@@ -19,6 +19,7 @@ interface Props {
   report: Report;
   onGenerateExcel: (report: Report) => void;
   onSaveProject: (project: Project) => void;
+  onSaveEmployeeSelection: (employeeProjectList: ProjectEmployee[]) => void;
   onCancel: () => void;
 }
 
@@ -28,6 +29,7 @@ export const ProjectComponent: React.FunctionComponent<Props> = ({
   report,
   onGenerateExcel,
   onSaveProject,
+  onSaveEmployeeSelection,
   onCancel,
 }) => {
   const [tab, setTab] = React.useState(0);
@@ -51,6 +53,7 @@ export const ProjectComponent: React.FunctionComponent<Props> = ({
       <TabPanelComponent value={tab} index={1}>
         <EmployeeComponent
           projectEmployeeList={project.employees}
+          onSave={onSaveEmployeeSelection}
           onCancel={onCancel}
           className={classes.root}
         />

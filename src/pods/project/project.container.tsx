@@ -2,22 +2,31 @@ import React from 'react';
 import { ProjectComponent } from './project.component';
 import { useParams } from 'react-router-dom';
 import { useSnackbarContext } from 'common/components';
-import { getProjectById, getEmployees } from './api';
+import {
+  getProjectById,
+  getEmployees,
+  saveProject,
+  saveProjectEmployeeList,
+} from './api';
 import { trackPromise } from 'react-promise-tracker';
-import { saveProject } from './api';
-import { mapProjectFromApiToVm, mapProjectFromVmToApi } from './project.mapper';
+import {
+  mapProjectFromApiToVm,
+  mapProjectFromVmToApi,
+  mapProjectEmployeeListFromVmToApi,
+} from './project.mapper';
 import {
   Project,
   createEmptyProject,
   Report,
   createEmptyReport,
+  ProjectEmployee,
 } from './project.vm';
 import { isEditModeHelper } from 'common/helpers';
 import { useHistory } from 'react-router';
-import { routes } from 'core/router';
+import { routes, EditParams } from 'core/router';
 
 export const ProjectContainer: React.FunctionComponent = () => {
-  const { id } = useParams();
+  const params = useParams<EditParams>();
   const [project, setProject] = React.useState<Project>(createEmptyProject());
   const [isEditMode, setIsEditMode] = React.useState<boolean>(false);
   const [report, setReport] = React.useState<Report>(createEmptyReport());
@@ -27,7 +36,7 @@ export const ProjectContainer: React.FunctionComponent = () => {
   const onLoadProject = async () => {
     try {
       const [apiEmployees, apiProject] = await trackPromise(
-        Promise.all([getEmployees(), getProjectById(id)])
+        Promise.all([getEmployees(), getProjectById(params.id)])
       );
       const viewModelProject = mapProjectFromApiToVm(apiProject, apiEmployees);
       setProject(viewModelProject);
@@ -57,6 +66,25 @@ export const ProjectContainer: React.FunctionComponent = () => {
     }
   };
 
+  const handleSaveEmployeeSelection = async (
+    proyectEmployeeList: ProjectEmployee[]
+  ) => {
+    if (params.id) {
+      try {
+        const apiEmployeeProjectList = mapProjectEmployeeListFromVmToApi(
+          proyectEmployeeList
+        );
+        await trackPromise(
+          saveProjectEmployeeList(params.id, apiEmployeeProjectList)
+        );
+        setProject({ ...project, employees: proyectEmployeeList });
+        showMessage('Se actualizó con éxito', 'success');
+      } catch (error) {
+        error && showMessage('Ha ocurrido un error al guardar', 'error');
+      }
+    }
+  };
+
   const handleCancel = () => {
     history.goBack();
   };
@@ -67,7 +95,7 @@ export const ProjectContainer: React.FunctionComponent = () => {
   };
 
   React.useEffect(() => {
-    const isEditMode = isEditModeHelper(id);
+    const isEditMode = isEditModeHelper(params.id);
     setIsEditMode(isEditMode);
     if (isEditMode) {
       onLoadProject();
@@ -80,6 +108,7 @@ export const ProjectContainer: React.FunctionComponent = () => {
       project={project}
       report={report}
       onSaveProject={handleSaveProject}
+      onSaveEmployeeSelection={handleSaveEmployeeSelection}
       onCancel={handleCancel}
       onGenerateExcel={handleGenerateExcel}
     />

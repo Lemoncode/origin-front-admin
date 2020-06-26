@@ -1,6 +1,5 @@
-import { Project, Employee } from './project.api-model';
+import { Project, Employee, ProjectEmployee } from './project.api-model';
 import { graphQLClient } from 'core/api';
-import { ProjectEmployee } from '../project.vm';
 
 interface GetProjectResponse {
   project: Project;
@@ -67,4 +66,18 @@ export const saveProject = async (project: Project): Promise<string> => {
   );
 
   return saveProject.id;
+};
+
+export const saveProjectEmployeeList = async (
+  id: string,
+  projectEmployeeList: ProjectEmployee[]
+): Promise<void> => {
+  const query = `mutation($projectEmployeeList: [ProjectEmployeeInput!]!) {
+    saveProjectEmployeeList(id: "${id}", projectEmployeeList: $projectEmployeeList,) {
+      id
+    }
+  }
+  `;
+
+  await graphQLClient.request(query, { projectEmployeeList });
 };
