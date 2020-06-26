@@ -1,5 +1,3 @@
-import { Employee } from 'pods/employee-list/employee-list.vm';
-
 export interface Project {
   id: string;
   name: string;

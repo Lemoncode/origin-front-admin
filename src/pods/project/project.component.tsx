@@ -18,7 +18,7 @@ interface Props {
   project: Project;
   report: Report;
   onGenerateExcel: (report: Report) => void;
-  onSave: (project: Project) => void;
+  onSaveProject: (project: Project) => void;
   onCancel: () => void;
 }
 
@@ -27,7 +27,7 @@ export const ProjectComponent: React.FunctionComponent<Props> = ({
   project,
   report,
   onGenerateExcel,
-  onSave,
+  onSaveProject,
   onCancel,
 }) => {
   const [tab, setTab] = React.useState(0);
@@ -44,7 +44,7 @@ export const ProjectComponent: React.FunctionComponent<Props> = ({
         <DataComponent
           project={project}
           onCancel={onCancel}
-          onSave={onSave}
+          onSave={onSaveProject}
           className={classes.root}
         />
       </TabPanelComponent>

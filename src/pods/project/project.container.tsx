@@ -4,7 +4,8 @@ import { useParams } from 'react-router-dom';
 import { useSnackbarContext } from 'common/components';
 import { getProjectById, getEmployees } from './api';
 import { trackPromise } from 'react-promise-tracker';
-import { mapProjectFromApiToVm } from './project.mapper';
+import { saveProject } from './api';
+import { mapProjectFromApiToVm, mapProjectFromVmToApi } from './project.mapper';
 import {
   Project,
   createEmptyProject,
@@ -12,6 +13,8 @@ import {
   createEmptyReport,
 } from './project.vm';
 import { isEditModeHelper } from 'common/helpers';
+import { useHistory } from 'react-router';
+import { routes } from 'core/router';
 
 export const ProjectContainer: React.FunctionComponent = () => {
   const { id } = useParams();
@@ -19,6 +22,7 @@ export const ProjectContainer: React.FunctionComponent = () => {
   const [isEditMode, setIsEditMode] = React.useState<boolean>(false);
   const [report, setReport] = React.useState<Report>(createEmptyReport());
   const { showMessage } = useSnackbarContext();
+  const history = useHistory();
 
   const onLoadProject = async () => {
     try {
@@ -33,12 +37,28 @@ export const ProjectContainer: React.FunctionComponent = () => {
     }
   };
 
-  const handleSave = (project: Project) => {
-    console.log('Guardado');
+  const handleSuccessSaveProject = (id: string, newProject: Project) => {
+    if (id) {
+      showMessage('Proyecto guardado con éxito', 'success');
+      setProject(newProject);
+      history.push(routes.editProject(id));
+    } else {
+      showMessage('Ha ocurrido un error al guardar el empleado', 'error');
+    }
+  };
+
+  const handleSaveProject = async (project: Project) => {
+    try {
+      const apiProject = mapProjectFromVmToApi(project);
+      const id = await trackPromise(saveProject(apiProject));
+      handleSuccessSaveProject(id, project);
+    } catch (error) {
+      error && showMessage(error.message, 'error');
+    }
   };
 
   const handleCancel = () => {
-    history.back();
+    history.goBack();
   };
 
   const handleGenerateExcel = (report: Report) => {
@@ -59,7 +79,7 @@ export const ProjectContainer: React.FunctionComponent = () => {
       isEditMode={isEditMode}
       project={project}
       report={report}
-      onSave={handleSave}
+      onSaveProject={handleSaveProject}
       onCancel={handleCancel}
       onGenerateExcel={handleGenerateExcel}
     />

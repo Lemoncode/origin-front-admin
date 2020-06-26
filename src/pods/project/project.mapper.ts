@@ -37,3 +37,17 @@ export const mapProjectFromApiToVm = (
       }
     : viewModel.createEmptyProject();
 };
+
+export const mapProjectFromVmToApi = (
+  project: viewModel.Project
+): apiModel.Project => {
+  return Boolean(project)
+    ? {
+        id: project.id,
+        name: project.name,
+        isActive: project.isActive,
+        externalId: project.externalId,
+        comments: project.comments,
+      }
+    : viewModel.createEmptyProject();
+};

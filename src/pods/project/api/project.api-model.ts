@@ -4,7 +4,7 @@ export interface Project {
   externalId?: string;
   comments?: string;
   isActive: boolean;
-  employees: ProjectEmployee[];
+  employees?: ProjectEmployee[];
 }
 
 export interface ProjectEmployee {
