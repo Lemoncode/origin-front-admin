@@ -1,31 +1,54 @@
 import React from 'react';
 import { TableContainer, RowRendererProps } from 'common/components';
-import { EmployeeSummary } from '../project.vm';
+import { ProjectEmployee } from '../project.vm';
 import { CommandFooterComponent } from 'common-app/command-footer';
 import { ProjectRowComponent } from './employee-row.component';
 
 interface Props {
-  employeeSummaryList: EmployeeSummary[];
+  projectEmployeeList: ProjectEmployee[];
+  onSave: (projectEmployeeList: ProjectEmployee[]) => void;
   onCancel: () => void;
   className: string;
 }
 
 export const EmployeeComponent: React.FunctionComponent<Props> = ({
-  employeeSummaryList,
+  projectEmployeeList,
+  onSave,
   onCancel,
   className,
 }) => {
+  const [employeeList, setProjectList] = React.useState<ProjectEmployee[]>(
+    projectEmployeeList
+  );
+
+  React.useEffect(() => {
+    setProjectList(projectEmployeeList);
+  }, [projectEmployeeList]);
+
+  const handleChangeEmployee = (id: string) => (employee: ProjectEmployee) => {
+    const updateEmployeeList = employeeList.map(e =>
+      e.id === id ? employee : e
+    );
+    setProjectList(updateEmployeeList);
+  };
+
+  const handleSave = () => onSave(employeeList);
   return (
     <>
       <TableContainer
         columns={['Asignado', 'Empleado']}
-        rows={employeeSummaryList}
+        rows={employeeList}
         className={className}
-        rowRenderer={(rowProps: RowRendererProps<EmployeeSummary>) => (
-          <ProjectRowComponent {...rowProps} />
+        rowRenderer={(rowProps: RowRendererProps<ProjectEmployee>) => (
+          <ProjectRowComponent
+            {...rowProps}
+            onChangeEmployee={handleChangeEmployee(rowProps.row.id)}
+          />
         )}
+        enablePagination={true}
+        pageSize={5}
       />
-      <CommandFooterComponent onCancel={onCancel} />
+      <CommandFooterComponent onSave={handleSave} onCancel={onCancel} />
     </>
   );
 };

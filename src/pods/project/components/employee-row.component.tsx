@@ -5,19 +5,31 @@ import {
   CellComponent,
 } from 'common/components';
 import Checkbox from '@material-ui/core/Checkbox';
-import { EmployeeSummary } from '../project.vm';
+import { ProjectEmployee } from '../project.vm';
 
-type Props = RowRendererProps<EmployeeSummary>;
+interface RowProps extends RowRendererProps<ProjectEmployee> {
+  onChangeEmployee: (employee: ProjectEmployee) => void;
+}
 
-export const ProjectRowComponent: React.FunctionComponent<Props> = ({
+export const ProjectRowComponent: React.FunctionComponent<RowProps> = ({
   row,
+  onChangeEmployee,
 }) => {
   return (
     <RowComponent>
       <CellComponent>
-        <Checkbox checked={row.isAssigned} color="primary" />
+        <Checkbox
+          color="primary"
+          onChange={(_, checked) =>
+            onChangeEmployee({
+              ...row,
+              isAssigned: checked,
+            })
+          }
+          checked={row.isAssigned}
+        />
       </CellComponent>
-      <CellComponent>{row.employeeName}</CellComponent>
+      <CellComponent>{row.name}</CellComponent>
     </RowComponent>
   );
 };

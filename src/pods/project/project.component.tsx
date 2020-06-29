@@ -10,21 +10,27 @@ import {
   EmployeeComponent,
   ReportComponent,
 } from './components';
-import { Project } from './project.vm';
+import { Project, Report, ProjectEmployee } from './project.vm';
 import * as classes from './project.styles';
 
 interface Props {
   isEditMode: boolean;
   project: Project;
-  onSave: (project: Project) => void;
+  report: Report;
+  onSaveProject: (project: Project) => void;
+  onSaveEmployeeSelection: (employeeProjectList: ProjectEmployee[]) => void;
   onCancel: () => void;
+  onGenerateExcel: (report: Report) => void;
 }
 
 export const ProjectComponent: React.FunctionComponent<Props> = ({
   isEditMode,
   project,
-  onSave,
+  report,
+  onSaveProject,
+  onSaveEmployeeSelection,
   onCancel,
+  onGenerateExcel,
 }) => {
   const [tab, setTab] = React.useState(0);
   return (
@@ -40,19 +46,25 @@ export const ProjectComponent: React.FunctionComponent<Props> = ({
         <DataComponent
           project={project}
           onCancel={onCancel}
-          onSave={onSave}
+          onSave={onSaveProject}
           className={classes.root}
         />
       </TabPanelComponent>
       <TabPanelComponent value={tab} index={1}>
         <EmployeeComponent
-          employeeSummaryList={project.employees}
+          projectEmployeeList={project.employees}
+          onSave={onSaveEmployeeSelection}
           onCancel={onCancel}
           className={classes.root}
         />
       </TabPanelComponent>
       <TabPanelComponent value={tab} index={2}>
-        <ReportComponent onCancel={onCancel} className={classes.root} />
+        <ReportComponent
+          report={report}
+          onCancel={onCancel}
+          className={classes.root}
+          onGenerateExcel={onGenerateExcel}
+        />
       </TabPanelComponent>
     </>
   );

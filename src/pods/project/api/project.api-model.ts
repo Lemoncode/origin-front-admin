@@ -4,11 +4,15 @@ export interface Project {
   externalId?: string;
   comments?: string;
   isActive: boolean;
-  employees: EmployeeSummary[];
+  employees?: ProjectEmployee[];
 }
 
-export interface EmployeeSummary {
+export interface ProjectEmployee {
   id: string;
   isAssigned?: boolean;
-  employeeName: string;
+}
+
+export interface Employee {
+  id: string;
+  name: string;
 }

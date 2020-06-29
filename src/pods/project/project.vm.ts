@@ -4,13 +4,18 @@ export interface Project {
   externalId?: string;
   comments?: string;
   isActive: boolean;
-  employees: EmployeeSummary[];
+  employees: ProjectEmployee[];
 }
 
-export interface EmployeeSummary {
+export interface ProjectEmployee {
   id: string;
   isAssigned?: boolean;
-  employeeName: string;
+  name: string;
+}
+
+export interface Report {
+  month: string;
+  year: string;
 }
 
 export const createEmptyProject = (): Project => ({
@@ -20,4 +25,15 @@ export const createEmptyProject = (): Project => ({
   comments: '',
   isActive: false,
   employees: [],
+});
+
+export const createEmptyReport = (): Report => ({
+  month: '',
+  year: '',
+});
+
+export const createEmptyProjectEmployee = (): ProjectEmployee => ({
+  id: '',
+  name: '',
+  isAssigned: false,
 });
