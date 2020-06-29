@@ -3,6 +3,7 @@ import { Formik, Form } from 'formik';
 import { TextFieldComponent, CheckboxComponent } from 'common/components';
 import { CommandFooterComponent } from '../../../common-app/command-footer';
 import { Project } from '../project.vm';
+import { formValidation } from './data.validations';
 
 interface Props {
   project: Project;
@@ -18,7 +19,12 @@ export const DataComponent: React.FunctionComponent<Props> = ({
   className,
 }) => {
   return (
-    <Formik initialValues={project} enableReinitialize={true} onSubmit={onSave}>
+    <Formik
+      initialValues={project}
+      enableReinitialize={true}
+      onSubmit={onSave}
+      validate={formValidation.validateForm}
+    >
       {() => (
         <Form className={className}>
           <TextFieldComponent
