@@ -43,6 +43,8 @@ export const ProjectComponent: React.FunctionComponent<Props> = ({
             onChangeProject={handleChangeProject(rowProps.row.id)}
           />
         )}
+        enablePagination={true}
+        pageSize={5}
       />
       <CommandFooterComponent onSave={handleSave} onCancel={onCancel} />
     </>
