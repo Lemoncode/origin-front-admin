@@ -13,7 +13,7 @@ import {
   mapProjectFromApiToVm,
   mapProjectFromVmToApi,
   mapProjectEmployeeListFromVmToApi,
-} from './project.mapper';
+} from './project.mappers';
 import {
   Project,
   createEmptyProject,
