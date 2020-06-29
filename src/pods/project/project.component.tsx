@@ -17,20 +17,20 @@ interface Props {
   isEditMode: boolean;
   project: Project;
   report: Report;
-  onGenerateExcel: (report: Report) => void;
   onSaveProject: (project: Project) => void;
   onSaveEmployeeSelection: (employeeProjectList: ProjectEmployee[]) => void;
   onCancel: () => void;
+  onGenerateExcel: (report: Report) => void;
 }
 
 export const ProjectComponent: React.FunctionComponent<Props> = ({
   isEditMode,
   project,
   report,
-  onGenerateExcel,
   onSaveProject,
   onSaveEmployeeSelection,
   onCancel,
+  onGenerateExcel,
 }) => {
   const [tab, setTab] = React.useState(0);
   return (

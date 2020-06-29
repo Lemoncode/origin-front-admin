@@ -45,6 +45,8 @@ export const EmployeeComponent: React.FunctionComponent<Props> = ({
             onChangeEmployee={handleChangeEmployee(rowProps.row.id)}
           />
         )}
+        enablePagination={true}
+        pageSize={5}
       />
       <CommandFooterComponent onSave={handleSave} onCancel={onCancel} />
     </>
